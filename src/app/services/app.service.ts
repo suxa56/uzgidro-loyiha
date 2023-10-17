@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {Gatekeeper} from 'gatekeeper-client-sdk';
 import {ApiService} from "@services/api.service";
 import {CookieOptions, CookieService} from "ngx-cookie-service";
+import {AuthResponse, User} from "@/store/state";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
-  public user: any = null;
+  public user: User = null;
 
   constructor(private router: Router, private toastr: ToastrService, private api: ApiService, private cookie: CookieService) {
   }
@@ -17,51 +17,44 @@ export class AppService {
   loginByAuth({email, password}) {
     try {
       this.api.loginByAuth({email, password}).subscribe({
-        next: (response: {token: string}) => {
-          if (response.token) {
-                  this.setToken(response.token)
-                  this.toastr.success('Login success');
-                }
+        next: (response: AuthResponse) => {
+          if (response) {
+            this.setToken(response)
+            this.user = response.user
+            this.toastr.success('Login success');
+            this.router.navigate(['/'])
+          }
         },
-        error: error  => {
-            if (error.status === 409) {
-              this.logout()
-              this.loginByAuth({email, password})
-            } else {
-              this.toastr.error(error, 'Ошибка при запросе данных')
-            }
+        error: error => {
+          if (error.status === 409) {
+            this.logout()
+            this.loginByAuth({email, password})
+          } else {
+            this.toastr.error(error, 'Ошибка при запросе данных')
+          }
         },
-        complete: () => {}
+        complete: () => {
+        }
       })
-      // const token = await Gatekeeper.loginByAuth(email, password);
-      // localStorage.setItem('token', token);
-      // await this.getProfile();
-      // this.router.navigate(['/']);
-      // this.toastr.success('Login success');
     } catch (error) {
       this.toastr.error(error.message);
     }
   }
 
   async registerByAuth({email, password}) {
-    try {
-      const token = await Gatekeeper.registerByAuth(email, password);
-      localStorage.setItem('token', token);
-      await this.getProfile();
-      this.router.navigate(['/']);
-      this.toastr.success('Register success');
-    } catch (error) {
-      this.toastr.error(error.message);
-    }
+    // try {
+    //   const token = await Gatekeeper.registerByAuth(email, password);
+    //   localStorage.setItem('token', token);
+    //   await this.getProfile();
+    //   this.router.navigate(['/']);
+    //   this.toastr.success('Register success');
+    // } catch (error) {
+    //   this.toastr.error(error.message);
+    // }
   }
 
-  async getProfile() {
-    try {
-      this.user = await Gatekeeper.getProfile();
-    } catch (error) {
-      this.logout();
-      throw error;
-    }
+  getProfile() {
+      return this.cookie.check('jwt');
   }
 
   logout() {
@@ -71,7 +64,7 @@ export class AppService {
     this.router.navigate(['/login']);
   }
 
-  private setToken(response: string | null) {
+  private setToken(response: AuthResponse | null) {
     if (response) {
       const options: CookieOptions = {
         path: '/',
@@ -80,7 +73,7 @@ export class AppService {
         domain: undefined,
         expires: new Date(new Date().getTime() + 3600 * 1000)
       }
-      this.cookie.set('jwt', response, options)
+      this.cookie.set('jwt', response.token, options)
     } else {
       this.cookie.deleteAll()
     }

@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {Gatekeeper} from 'gatekeeper-client-sdk';
+import {HttpClient} from "@angular/common/http";
+import {ApiService} from "@services/api.service";
 
 @Injectable({
     providedIn: 'root'
@@ -9,15 +11,16 @@ import {Gatekeeper} from 'gatekeeper-client-sdk';
 export class AppService {
     public user: any = null;
 
-    constructor(private router: Router, private toastr: ToastrService) {}
+    constructor(private router: Router, private toastr: ToastrService, private api: ApiService) {}
 
-    async loginByAuth({email, password}) {
+    loginByAuth({email, password}) {
         try {
-            const token = await Gatekeeper.loginByAuth(email, password);
-            localStorage.setItem('token', token);
-            await this.getProfile();
-            this.router.navigate(['/']);
-            this.toastr.success('Login success');
+          this.api.loginByAuth({email, password}).subscribe((response) => console.log(response))
+            // const token = await Gatekeeper.loginByAuth(email, password);
+            // localStorage.setItem('token', token);
+            // await this.getProfile();
+            // this.router.navigate(['/']);
+            // this.toastr.success('Login success');
         } catch (error) {
             this.toastr.error(error.message);
         }

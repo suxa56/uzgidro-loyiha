@@ -35,54 +35,6 @@ export class AppService {
         }
     }
 
-    async loginByGoogle() {
-        try {
-            const token = await Gatekeeper.loginByGoogle();
-            localStorage.setItem('token', token);
-            await this.getProfile();
-            this.router.navigate(['/']);
-            this.toastr.success('Login success');
-        } catch (error) {
-            this.toastr.error(error.message);
-        }
-    }
-
-    async registerByGoogle() {
-        try {
-            const token = await Gatekeeper.registerByGoogle();
-            localStorage.setItem('token', token);
-            await this.getProfile();
-            this.router.navigate(['/']);
-            this.toastr.success('Register success');
-        } catch (error) {
-            this.toastr.error(error.message);
-        }
-    }
-
-    async loginByFacebook() {
-        try {
-            const token = await Gatekeeper.loginByFacebook();
-            localStorage.setItem('token', token);
-            await this.getProfile();
-            this.router.navigate(['/']);
-            this.toastr.success('Login success');
-        } catch (error) {
-            this.toastr.error(error.message);
-        }
-    }
-
-    async registerByFacebook() {
-        try {
-            const token = await Gatekeeper.registerByFacebook();
-            localStorage.setItem('token', token);
-            await this.getProfile();
-            this.router.navigate(['/']);
-            this.toastr.success('Register success');
-        } catch (error) {
-            this.toastr.error(error.message);
-        }
-    }
-
     async getProfile() {
         try {
             this.user = await Gatekeeper.getProfile();

@@ -5,15 +5,15 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiService {
-  private siteUrl: string = 'https://8464-94-158-60-58.ngrok-free.app/'
+  private siteUrl: string = 'https://1676-94-158-60-181.ngrok-free.app/'
   private loginUrl: string = 'api/login/'
   private logoutUrl: string = 'api/logout/'
 
   constructor(private http: HttpClient) {
   }
 
-  loginByAuth({email, password}) {
-    return this.http.post(this.siteUrl + this.loginUrl, {username: email, password: password})
+  loginByAuth({username, password}) {
+    return this.http.post(this.siteUrl + this.loginUrl, {username: username, password: password})
   }
 
   logout() {

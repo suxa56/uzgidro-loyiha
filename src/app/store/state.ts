@@ -1,14 +1,12 @@
 import {UiState} from './ui/state';
 
 export interface AppState {
-    auth: any;
-    ui: UiState;
+    auth: any
+    ui: UiState
 }
 
 export interface AuthResponse {
-  token: string,
-  user: User,
-  message: string
+  access: string
 }
 export interface User {
   id: number

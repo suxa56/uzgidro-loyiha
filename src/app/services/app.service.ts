@@ -1,101 +1,82 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {Gatekeeper} from 'gatekeeper-client-sdk';
+import {ApiService} from "@services/api.service";
+import {CookieOptions, CookieService} from "ngx-cookie-service";
+import {AuthResponse} from "@/store/state";
+import * as jwtDecode from 'jwt-decode';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class AppService {
-    public user: any = null;
+  public user: number = null;
 
-    constructor(private router: Router, private toastr: ToastrService) {}
+  constructor(private router: Router, private toastr: ToastrService, private api: ApiService, private cookie: CookieService) {
+  }
 
-    async loginByAuth({email, password}) {
-        try {
-            const token = await Gatekeeper.loginByAuth(email, password);
-            localStorage.setItem('token', token);
-            await this.getProfile();
-            this.router.navigate(['/']);
+  loginByAuth({username, password}) {
+    try {
+      this.api.loginByAuth({username, password}).subscribe({
+        next: (response: AuthResponse) => {
+          if (response) {
+            this.setToken(response)
             this.toastr.success('Login success');
-        } catch (error) {
-            this.toastr.error(error.message);
+            this.router.navigate(['/'])
+          }
+        },
+        error: error => {
+          this.toastr.error(error, 'Ошибка при запросе данных')
+        },
+        complete: () => {
         }
+      })
+    } catch (error) {
+      this.toastr.error(error.message);
     }
+  }
 
-    async registerByAuth({email, password}) {
-        try {
-            const token = await Gatekeeper.registerByAuth(email, password);
-            localStorage.setItem('token', token);
-            await this.getProfile();
-            this.router.navigate(['/']);
-            this.toastr.success('Register success');
-        } catch (error) {
-            this.toastr.error(error.message);
-        }
-    }
+  async registerByAuth({email, password}) {
+    // try {
+    //   const token = await Gatekeeper.registerByAuth(email, password);
+    //   localStorage.setItem('token', token);
+    //   await this.getProfile();
+    //   this.router.navigate(['/']);
+    //   this.toastr.success('Register success');
+    // } catch (error) {
+    //   this.toastr.error(error.message);
+    // }
+  }
 
-    async loginByGoogle() {
-        try {
-            const token = await Gatekeeper.loginByGoogle();
-            localStorage.setItem('token', token);
-            await this.getProfile();
-            this.router.navigate(['/']);
-            this.toastr.success('Login success');
-        } catch (error) {
-            this.toastr.error(error.message);
-        }
+  getProfile() {
+    if (this.cookie.check('jwt')) {
+      return jwtDecode.jwtDecode(this.cookie.get('jwt')).exp < new Date().getTime()
+    } else {
+      this.logout()
+      return false
     }
+  }
 
-    async registerByGoogle() {
-        try {
-            const token = await Gatekeeper.registerByGoogle();
-            localStorage.setItem('token', token);
-            await this.getProfile();
-            this.router.navigate(['/']);
-            this.toastr.success('Register success');
-        } catch (error) {
-            this.toastr.error(error.message);
-        }
-    }
+  logout() {
+    // this.api.logout()
+    this.setToken(null)
+    this.user = null;
+    this.router.navigate(['/login']);
+  }
 
-    async loginByFacebook() {
-        try {
-            const token = await Gatekeeper.loginByFacebook();
-            localStorage.setItem('token', token);
-            await this.getProfile();
-            this.router.navigate(['/']);
-            this.toastr.success('Login success');
-        } catch (error) {
-            this.toastr.error(error.message);
-        }
+  private setToken(response: AuthResponse | null) {
+    if (response) {
+      let token = jwtDecode.jwtDecode(response.access);
+      const options: CookieOptions = {
+        path: '/',
+        sameSite: "Strict",
+        secure: true,
+        domain: undefined,
+        expires: token.exp
+      }
+      this.cookie.set('jwt', response.access, options)
+    } else {
+      this.cookie.deleteAll()
     }
-
-    async registerByFacebook() {
-        try {
-            const token = await Gatekeeper.registerByFacebook();
-            localStorage.setItem('token', token);
-            await this.getProfile();
-            this.router.navigate(['/']);
-            this.toastr.success('Register success');
-        } catch (error) {
-            this.toastr.error(error.message);
-        }
-    }
-
-    async getProfile() {
-        try {
-            this.user = await Gatekeeper.getProfile();
-        } catch (error) {
-            this.logout();
-            throw error;
-        }
-    }
-
-    logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('gatekeeper_token');
-        this.user = null;
-        this.router.navigate(['/login']);
-    }
+  }
 }

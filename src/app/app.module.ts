@@ -25,15 +25,15 @@ import {UserComponent} from '@modules/main/header/user/user.component';
 import {ForgotPasswordComponent} from '@modules/forgot-password/forgot-password.component';
 import {RecoverPasswordComponent} from '@modules/recover-password/recover-password.component';
 import {LanguageComponent} from '@modules/main/header/language/language.component';
-import {MainMenuComponent} from './pages/main-menu/main-menu.component';
-import {SubMenuComponent} from './pages/main-menu/sub-menu/sub-menu.component';
-import {MenuItemComponent} from './components/menu-item/menu-item.component';
-import {ControlSidebarComponent} from './modules/main/control-sidebar/control-sidebar.component';
+import {MainMenuComponent} from '@pages/main-menu/main-menu.component';
+import {SubMenuComponent} from '@pages/main-menu/sub-menu/sub-menu.component';
+import {MenuItemComponent} from '@components/menu-item/menu-item.component';
+import {ControlSidebarComponent} from '@modules/main/control-sidebar/control-sidebar.component';
 import {StoreModule} from '@ngrx/store';
 import {authReducer} from './store/auth/reducer';
 import {uiReducer} from './store/ui/reducer';
 import {ProfabricComponentsModule} from '@profabric/angular-components';
-import {SidebarSearchComponent} from './components/sidebar-search/sidebar-search.component';
+import {SidebarSearchComponent} from '@components/sidebar-search/sidebar-search.component';
 
 registerLocaleData(localeEn, 'en-EN');
 

@@ -41,7 +41,7 @@ export const MENU = [
   },
   {
     name: 'Проекты',
-    iconClasses: 'fa-solid fa-files',
+    iconClasses: 'fa-solid fa-folder',
     children: [
       {
         name: 'Все проекты',
@@ -50,12 +50,12 @@ export const MENU = [
       },
       {
         name: 'Одобренные проекты',
-        iconClasses: 'fa-solid fa-file-circle-check',
+        iconClasses: 'fa-solid fa-file-check',
         path: ['/sub-menu-2']
       },
       {
         name: 'Отклоненные проекты',
-        iconClasses: 'fa-solid fa-file-circle-xmark',
+        iconClasses: 'fa-solid fa-file-xmark',
         path: ['/sub-menu-3']
       }
     ]

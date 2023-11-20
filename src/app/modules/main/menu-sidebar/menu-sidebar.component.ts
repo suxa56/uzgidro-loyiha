@@ -61,8 +61,8 @@ export const MENU = [
     ]
   },
   {
-    name: 'Blank',
-    iconClasses: 'fas fa-file',
+    name: 'Заключение',
+    iconClasses: 'fa-solid fa-ballot-check',
     path: ['/blank']
   },
 ];

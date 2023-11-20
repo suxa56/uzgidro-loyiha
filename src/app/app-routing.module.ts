@@ -36,6 +36,10 @@ const routes: Routes = [
                 path: 'sub-menu-2',
                 component: BlankComponent
             },
+          {
+            path: 'sub-menu-3',
+            component: BlankComponent
+          },
             {
                 path: '',
                 component: DashboardComponent

@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {MainComponent} from '@modules/main/main.component';
-import {BlankComponent} from '@pages/blank/blank.component';
 import {LoginComponent} from '@modules/login/login.component';
 import {ProfileComponent} from '@pages/profile/profile.component';
 import {RegisterComponent} from '@modules/register/register.component';
@@ -12,6 +11,7 @@ import {ForgotPasswordComponent} from '@modules/forgot-password/forgot-password.
 import {RecoverPasswordComponent} from '@modules/recover-password/recover-password.component';
 import {CreateProjectComponent} from "@pages/create-project/create-project.component";
 import {ProjectsComponent} from "@pages/projects/projects.component";
+import {ConclusionComponent} from "@pages/conclusion/conclusion.component";
 
 const routes: Routes = [
   {
@@ -30,7 +30,7 @@ const routes: Routes = [
       },
       {
         path: 'conclusion',
-        component: BlankComponent
+        component: ConclusionComponent
       },
       {
         path: 'projects',

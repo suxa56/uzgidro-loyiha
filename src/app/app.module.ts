@@ -37,6 +37,7 @@ import {SidebarSearchComponent} from '@components/sidebar-search/sidebar-search.
 import { CreateProjectComponent } from '@pages/create-project/create-project.component';
 import { ProjectsComponent } from '@pages/projects/projects.component';
 import { ProjectItemComponent } from '@components/project-item/project-item.component';
+import { ConclusionComponent } from '@pages/conclusion/conclusion.component';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -65,7 +66,8 @@ registerLocaleData(localeEn, 'en-EN');
         SidebarSearchComponent,
         CreateProjectComponent,
         ProjectsComponent,
-        ProjectItemComponent
+        ProjectItemComponent,
+        ConclusionComponent
     ],
     imports: [
         ProfabricComponentsModule,

@@ -1,0 +1,90 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Новый проект</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Главная</a></li>
+          <li class="breadcrumb-item active">Новый проект</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+  <!-- Default box -->
+  <div class="container-fluid">
+    <div class="card">
+      <div class="flex flex-row border-b border-slate-300 py-3 px-4 justify-between">
+        <input class="card-title outline-0" placeholder="Название проекта"/>
+
+        <div class="card-tools">
+          <button
+            type="button"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded">
+            Отправить
+          </button>
+        </div>
+      </div>
+      <div class="card-body flex flex-col space-y-1.5">
+        <div class="flex max-xl:flex-col max-xl:space-y-1.5 xl:flex-row xl:space-x-8">
+          <div class="flex flex-col w-full">
+            Номер графика:
+            <input class="outline-blue-500 border border-blue-400 px-2 py-1">
+          </div>
+          <div class="flex flex-col w-full">
+            Архивный номер:
+            <input class="outline-blue-500 border border-blue-400 px-2 py-1">
+          </div>
+          <div class="flex flex-col w-full">
+            ФИО исполнителя:
+            <input class="outline-blue-500 border border-blue-400 px-2 py-1">
+          </div>
+        </div>
+        <div class="flex flex-col w-full">
+          Комментарий:
+          <textarea class="outline-blue-500 border border-blue-400 px-2 py-1"></textarea>
+        </div>
+      </div>
+      <!-- /.card-body -->
+      <div class="card-footer space-y-4">
+        <div>
+          <h2 class="font-medium text-lg">Документы проекта</h2>
+          <div class="flex xl:flex-row max-xl:flex-col max-xl:space-y-2">
+            <div>
+              PDF:
+              <input class="file" type="file" accept=".pdf">
+            </div>
+            <div>
+              Autocad:
+              <input class="file" type="file" accept=".dwg, .dxf">
+            </div>
+          </div>
+        </div>
+        <div>
+          <h2 class="font-medium text-lg">Смета</h2>
+          <div class="flex xl:flex-row max-xl:flex-col max-xl:space-y-2">
+            <div>
+              PDF:
+              <input class="file" type="file" accept=".pdf">
+            </div>
+            <div>
+              Excel:
+              <input class="file" type="file" accept="application/vnd.ms-excel">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-footer-->
+    </div>
+  </div>
+  <!-- /.card -->
+</section>
+<!-- /.content -->

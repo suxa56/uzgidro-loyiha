@@ -1,0 +1,33 @@
+<table class="table table-auto">
+  <thead>
+  <tr>
+    <td>№</td>
+    <td>Граф номер</td>
+    <td>Номер архива</td>
+    <td>Исполнитель</td>
+    <td>Проектный PDF</td>
+    <td>Проектный Autocad</td>
+    <td>Смета PDF</td>
+    <td>Смета Excel</td>
+    <td>Дата</td>
+    <td>Статус</td>
+  </tr>
+  </thead>
+  <tbody *ngFor="let project of projects; index as i">
+  <tr>
+    <td>{{i+1}}</td>
+    <td>{{project.gruffNumber}}</td>
+    <td>{{project.archiveNumber}}</td>
+    <td>{{project.executor}}</td>
+    <td><i class="fa-solid fa-file-pdf"></i></td>
+    <td><i class="fa-solid fa-file-invoice"></i></td>
+    <td><i class="fa-solid fa-file-pdf"></i></td>
+    <td><i class="fa-solid fa-file-excel"></i></td>
+    <td>{{project.date | date:'dd-MM-yyyy'}}</td>
+    <td [ngClass]="{
+      'text-red-600': project.status == 'Отклонено',
+      'text-green-600': project.status == 'Одобрено'
+    }">{{project.status}}</td>
+  </tr>
+  </tbody>
+</table>

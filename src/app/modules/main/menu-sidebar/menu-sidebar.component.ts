@@ -46,23 +46,23 @@ export const MENU = [
       {
         name: 'Все проекты',
         iconClasses: 'fa-solid fa-files',
-        path: ['/sub-menu-1']
+        path: ['/projects']
       },
       {
         name: 'Одобренные проекты',
         iconClasses: 'fa-solid fa-file-check',
-        path: ['/sub-menu-2']
+        path: ['/approved']
       },
       {
         name: 'Отклоненные проекты',
         iconClasses: 'fa-solid fa-file-xmark',
-        path: ['/sub-menu-3']
+        path: ['/rejected']
       }
     ]
   },
   {
     name: 'Заключение',
     iconClasses: 'fa-solid fa-ballot-check',
-    path: ['/blank']
+    path: ['/conclusion']
   },
 ];

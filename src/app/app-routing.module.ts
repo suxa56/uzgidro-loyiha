@@ -10,9 +10,8 @@ import {AuthGuard} from '@guards/auth.guard';
 import {NonAuthGuard} from '@guards/non-auth.guard';
 import {ForgotPasswordComponent} from '@modules/forgot-password/forgot-password.component';
 import {RecoverPasswordComponent} from '@modules/recover-password/recover-password.component';
-import {MainMenuComponent} from '@pages/main-menu/main-menu.component';
-import {SubMenuComponent} from '@pages/main-menu/sub-menu/sub-menu.component';
 import {CreateProjectComponent} from "@pages/create-project/create-project.component";
+import {ProjectsComponent} from "@pages/projects/projects.component";
 
 const routes: Routes = [
   {
@@ -30,20 +29,20 @@ const routes: Routes = [
         component: ProfileComponent
       },
       {
-        path: 'blank',
+        path: 'conclusion',
         component: BlankComponent
       },
       {
-        path: 'sub-menu-1',
-        component: SubMenuComponent
+        path: 'projects',
+        component: ProjectsComponent
       },
       {
-        path: 'sub-menu-2',
-        component: BlankComponent
+        path: 'approved',
+        component: ProjectsComponent
       },
       {
-        path: 'sub-menu-3',
-        component: BlankComponent
+        path: 'rejected',
+        component: ProjectsComponent
       },
       {
         path: '',

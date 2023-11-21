@@ -37,7 +37,7 @@ export const MENU = [
   {
     name: 'Создать проект',
     iconClasses: 'fa-solid fa-file-circle-plus',
-    path: ['/']
+    path: ['/create']
   },
   {
     name: 'Проекты',

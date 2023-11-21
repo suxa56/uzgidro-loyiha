@@ -12,65 +12,71 @@ import {ForgotPasswordComponent} from '@modules/forgot-password/forgot-password.
 import {RecoverPasswordComponent} from '@modules/recover-password/recover-password.component';
 import {MainMenuComponent} from '@pages/main-menu/main-menu.component';
 import {SubMenuComponent} from '@pages/main-menu/sub-menu/sub-menu.component';
+import {CreateProjectComponent} from "@pages/create-project/create-project.component";
 
 const routes: Routes = [
-    {
+  {
+    path: '',
+    component: MainComponent,
+    // canActivate: [AuthGuard],
+    // canActivateChild: [AuthGuard],
+    children: [
+      {
+        path: 'create',
+        component: CreateProjectComponent
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent
+      },
+      {
+        path: 'blank',
+        component: BlankComponent
+      },
+      {
+        path: 'sub-menu-1',
+        component: SubMenuComponent
+      },
+      {
+        path: 'sub-menu-2',
+        component: BlankComponent
+      },
+      {
+        path: 'sub-menu-3',
+        component: BlankComponent
+      },
+      {
         path: '',
-        component: MainComponent,
-        // canActivate: [AuthGuard],
-        // canActivateChild: [AuthGuard],
-        children: [
-            {
-                path: 'profile',
-                component: ProfileComponent
-            },
-            {
-                path: 'blank',
-                component: BlankComponent
-            },
-            {
-                path: 'sub-menu-1',
-                component: SubMenuComponent
-            },
-            {
-                path: 'sub-menu-2',
-                component: BlankComponent
-            },
-          {
-            path: 'sub-menu-3',
-            component: BlankComponent
-          },
-            {
-                path: '',
-                component: DashboardComponent
-            }
-        ]
-    },
-    {
-        path: 'login',
-        component: LoginComponent,
-        canActivate: [NonAuthGuard]
-    },
-    {
-        path: 'register',
-        component: RegisterComponent,
-        canActivate: [NonAuthGuard]
-    },
-    {
-        path: 'forgot-password',
-        component: ForgotPasswordComponent,
-        canActivate: [NonAuthGuard]
-    },
-    {
-        path: 'recover-password',
-        component: RecoverPasswordComponent,
-        canActivate: [NonAuthGuard]
-    },
-    {path: '**', redirectTo: ''}
+        component: DashboardComponent
+      }
+    ]
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [NonAuthGuard]
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [NonAuthGuard]
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
+    canActivate: [NonAuthGuard]
+  },
+  {
+    path: 'recover-password',
+    component: RecoverPasswordComponent,
+    canActivate: [NonAuthGuard]
+  },
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, {})],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, {})],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

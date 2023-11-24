@@ -42,6 +42,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         if (this.appService.user) {
             return true;
         }
-        return this.appService.getProfile();
+        return this.appService.getToken();
     }
 }

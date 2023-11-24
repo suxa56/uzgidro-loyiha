@@ -12,12 +12,12 @@ import * as jwtDecode from 'jwt-decode';
 export class AppService {
   public user: number = null;
 
-  constructor(private router: Router, private toastr: ToastrService, private api: ApiService, private cookie: CookieService) {
+  constructor(private router: Router, private toastr: ToastrService, private apiService: ApiService, private cookie: CookieService) {
   }
 
   loginByAuth({username, password}) {
     try {
-      this.api.loginByAuth({username, password}).subscribe({
+      this.apiService.loginByAuth({username, password}).subscribe({
         next: (response: AuthResponse) => {
           if (response) {
             this.setToken(response)
@@ -49,6 +49,32 @@ export class AppService {
   }
 
   getProfile() {
+    let token = this.cookie.get('jwt')
+    if (token) {
+      this.apiService.getProfile(jwtDecode.jwtDecode(token)['user_id'], token).subscribe({
+        next: (response) => {
+          console.log(response)
+        },
+        error: error => {
+          console.error('Ошибка:', error);
+
+          // Если есть дополнительная информация об ошибке
+          if (error.error instanceof ErrorEvent) {
+            // Обработка ошибок на стороне клиента
+            console.error('Произошла ошибка:', error.error.message);
+          } else {
+            // Обработка ошибок на стороне сервера
+            console.error(`Код ошибки ${error.status}, ` + `Текст ошибки: ${error.error}`);
+          }
+          this.toastr.error(error, 'Ошибка при запросе данных')
+        },
+        complete: () => {
+        }
+      })
+    }
+  }
+
+  getToken() {
     if (this.cookie.check('jwt')) {
       return jwtDecode.jwtDecode(this.cookie.get('jwt')).exp < new Date().getTime()
     } else {

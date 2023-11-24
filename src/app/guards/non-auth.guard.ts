@@ -24,7 +24,7 @@ export class NonAuthGuard implements CanActivate, CanActivateChild {
         | Promise<boolean | UrlTree>
         | boolean
         | UrlTree {
-        if (!this.appService.getProfile()) {
+        if (!this.appService.getToken()) {
             return true;
         }
         this.router.navigate(['/']);

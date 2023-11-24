@@ -5,9 +5,10 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiService {
-  private siteUrl: string = 'https://19f2-185-213-229-66.ngrok-free.app/api/'
+  private siteUrl: string = 'https://3705-185-213-229-66.ngrok-free.app/api/'
   private loginUrl: string = 'login/'
   private profile: string = 'profile/'
+  private categories: string = 'designer/categories/'
 
   constructor(private http: HttpClient) {
   }
@@ -16,16 +17,22 @@ export class ApiService {
     return this.http.post(this.siteUrl + this.loginUrl, {username: username, password: password})
   }
 
-  getProfile(userId: number, token: string) {
-    console.log(userId)
+  getCategories(token: string) {
     console.log(token)
-    console.log(this.siteUrl + this.profile + userId + '/')
-    const headers = new HttpHeaders({
+    const options = this.setHeader(token)
+    return this.http.get(this.siteUrl + this.categories, {headers: options})
+  }
+
+  getProfile(userId: number, token: string) {
+    console.log(token)
+    const options = this.setHeader(token)
+    return this.http.get(this.siteUrl + this.profile + userId + '/', {headers: options})
+  }
+
+  private setHeader(token: string) {
+    return  new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    const options = {headers: headers};
-    console.log(options)
-    return this.http.get(this.siteUrl + this.profile + userId + '/', options)
   }
 }

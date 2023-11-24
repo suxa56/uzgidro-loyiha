@@ -12,27 +12,27 @@ export class ProjectsComponent implements OnInit{
     archiveNumber: 1,
     executor: 'Ma\'rufov Ma\'ruf',
     date: new Date(2023, 9, 11),
-    status: 'Одобрено'},
+    status: 'Qabul qilingan'},
     {gruffNumber: 2,
     archiveNumber: 2,
     executor: 'Azamatov Azamat',
     date: new Date(2023, 9, 12),
-    status: 'Одобрено'},
+    status: 'Qabul qilingan'},
     {gruffNumber: 3,
     archiveNumber: 3,
     executor: 'Nishonov Nishon',
     date: new Date(2023, 9, 13),
-    status: 'Отклонено'},
+    status: 'Rad etilgan'},
     {gruffNumber: 4,
     archiveNumber: 4,
     executor: 'Temurov Temur',
     date: new Date(2023, 9, 15),
-    status: 'Отклонено'},
+    status: 'Rad etilgan'},
     {gruffNumber: 5,
     archiveNumber: 5,
     executor: 'Umarov Umar',
     date: new Date(2023, 9, 20),
-    status: 'Одобрено'}
+    status: 'Qabul qilingan'}
   ]
 
   constructor(private router: Router) {
@@ -41,14 +41,14 @@ export class ProjectsComponent implements OnInit{
   ngOnInit() {
     if (this.router.url === '/rejected') {
       for (let i = this.projects.length - 1; i >= 0; i--) {
-        if (this.projects[i].status === 'Одобрено') {
+        if (this.projects[i].status === 'Qabul qilingan') {
           this.projects.splice(i, 1);
         }
       }
     }
     if (this.router.url === '/approved') {
       for (let i = this.projects.length - 1; i >= 0; i--) {
-        if (this.projects[i].status === 'Отклонено') {
+        if (this.projects[i].status === 'Rad etilgan') {
           this.projects.splice(i, 1);
         }
       }

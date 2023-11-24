@@ -2,15 +2,15 @@
   <thead>
   <tr>
     <td>№</td>
-    <td>Граф номер</td>
-    <td>Номер архива</td>
-    <td>Исполнитель</td>
-    <td>Проектный PDF</td>
-    <td>Проектный Autocad</td>
-    <td>Смета PDF</td>
-    <td>Смета Excel</td>
-    <td>Дата</td>
-    <td>Статус</td>
+    <td>Graf raqami</td>
+    <td>Arxiv raqami</td>
+    <td>Ishchi loyiha nomi</td>
+    <td>Loyiha PDF</td>
+    <td>Loyiha Autocad</td>
+    <td>Smeta PDF</td>
+    <td>Smeta Excel</td>
+    <td>Sana</td>
+    <td>Status</td>
   </tr>
   </thead>
   <tbody *ngFor="let project of projects; index as i">
@@ -25,8 +25,8 @@
     <td><i class="fa-solid fa-file-excel"></i></td>
     <td>{{project.date | date:'dd-MM-yyyy'}}</td>
     <td [ngClass]="{
-      'text-red-600': project.status == 'Отклонено',
-      'text-green-600': project.status == 'Одобрено'
+      'text-red-600': project.status == 'Rad etilgan',
+      'text-green-600': project.status == 'Qabul qilingan'
     }">{{project.status}}</td>
   </tr>
   </tbody>

@@ -35,33 +35,32 @@ export class MenuSidebarComponent implements OnInit {
 
 export const MENU = [
   {
-    name: 'Создать проект',
+    name: 'Birlamchi hujjatlar',
+    iconClasses: 'fa-solid fa-file-circle-plus',
+    path: ['/docs']
+  },
+  {
+    name: 'Loyiha kiritish',
     iconClasses: 'fa-solid fa-file-circle-plus',
     path: ['/create']
   },
   {
-    name: 'Проекты',
-    iconClasses: 'fa-solid fa-folder',
-    children: [
-      {
-        name: 'Все проекты',
-        iconClasses: 'fa-solid fa-files',
-        path: ['/projects']
-      },
-      {
-        name: 'Одобренные проекты',
-        iconClasses: 'fa-solid fa-file-check',
-        path: ['/approved']
-      },
-      {
-        name: 'Отклоненные проекты',
-        iconClasses: 'fa-solid fa-file-xmark',
-        path: ['/rejected']
-      }
-    ]
+    name: 'Barcha loyihalar',
+    iconClasses: 'fa-solid fa-files',
+    path: ['/projects']
   },
   {
-    name: 'Заключение',
+    name: 'Qabul qilingan loyihalar',
+    iconClasses: 'fa-solid fa-file-check',
+    path: ['/approved']
+  },
+  {
+    name: 'Rad etilgan loyihalar',
+    iconClasses: 'fa-solid fa-file-xmark',
+    path: ['/rejected']
+  },
+  {
+    name: 'Xulosalar',
     iconClasses: 'fa-solid fa-ballot-check',
     path: ['/conclusion']
   },

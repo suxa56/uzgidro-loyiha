@@ -11,8 +11,32 @@ import * as jwtDecode from 'jwt-decode';
 })
 export class AppService {
   public user: number = null;
+  token = this.cookie.get('jwt')
 
   constructor(private router: Router, private toastr: ToastrService, private apiService: ApiService, private cookie: CookieService) {
+  }
+
+  getCategories() {
+    this.apiService.getCategories(this.token).subscribe({
+      next: response => {
+        console.log(response)
+      },
+      error: error => {
+        console.error('Ошибка:', error);
+
+        // Если есть дополнительная информация об ошибке
+        if (error.error instanceof ErrorEvent) {
+          // Обработка ошибок на стороне клиента
+          console.error('Произошла ошибка:', error.error.message);
+        } else {
+          // Обработка ошибок на стороне сервера
+          console.error(`Код ошибки ${error.status}, ` + `Текст ошибки: ${error.error}`);
+        }
+        this.toastr.error(error, 'Ошибка при запросе данных')
+      },
+      complete: () => {
+      }
+    })
   }
 
   loginByAuth({username, password}) {
@@ -49,9 +73,8 @@ export class AppService {
   }
 
   getProfile() {
-    let token = this.cookie.get('jwt')
-    if (token) {
-      this.apiService.getProfile(jwtDecode.jwtDecode(token)['user_id'], token).subscribe({
+    if (this.token) {
+      this.apiService.getProfile(jwtDecode.jwtDecode(this.token)['user_id'], this.token).subscribe({
         next: (response) => {
           console.log(response)
         },

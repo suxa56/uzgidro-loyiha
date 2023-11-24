@@ -12,6 +12,7 @@ import {RecoverPasswordComponent} from '@modules/recover-password/recover-passwo
 import {CreateProjectComponent} from "@pages/create-project/create-project.component";
 import {ProjectsComponent} from "@pages/projects/projects.component";
 import {ConclusionComponent} from "@pages/conclusion/conclusion.component";
+import {DocsComponent} from "@pages/docs/docs.component";
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [
+      {
+        path: 'docs',
+        component: DocsComponent
+      },
       {
         path: 'create',
         component: CreateProjectComponent

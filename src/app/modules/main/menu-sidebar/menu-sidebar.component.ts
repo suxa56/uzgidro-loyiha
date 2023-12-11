@@ -15,7 +15,6 @@ const BASE_CLASSES = 'main-sidebar elevation-4';
 export class MenuSidebarComponent implements OnInit {
   @HostBinding('class') classes: string = BASE_CLASSES;
   public ui: Observable<UiState>;
-  public user;
   public menu = MENU;
 
   constructor(
@@ -29,7 +28,6 @@ export class MenuSidebarComponent implements OnInit {
     this.ui.subscribe((state: UiState) => {
       this.classes = `${BASE_CLASSES} ${state.sidebarSkin}`;
     });
-    this.user = this.appService.user;
   }
 }
 

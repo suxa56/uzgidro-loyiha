@@ -1,36 +1,45 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
+const SITE = 'https://4-sqd.uz/api/'
+const LOGIN = 'login/'
+const PROFILE = 'profile/'
+const CATEGORIES = 'designer/categories/'
+
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private siteUrl: string = 'https://3705-185-213-229-66.ngrok-free.app/api/'
-  private loginUrl: string = 'login/'
-  private profile: string = 'profile/'
-  private categories: string = 'designer/categories/'
 
   constructor(private http: HttpClient) {
   }
 
   loginByAuth({username, password}) {
-    return this.http.post(this.siteUrl + this.loginUrl, {username: username, password: password})
+    return this.http.post(SITE + LOGIN, {username: username, password: password})
   }
 
   getCategories(token: string) {
-    console.log(token)
     const options = this.setHeader(token)
-    return this.http.get(this.siteUrl + this.categories, {headers: options})
+    return this.http.get(SITE + CATEGORIES, {headers: options})
   }
 
   getProfile(userId: number, token: string) {
-    console.log(token)
     const options = this.setHeader(token)
-    return this.http.get(this.siteUrl + this.profile + userId + '/', {headers: options})
+    return this.http.get(SITE + PROFILE + userId + '/', {headers: options})
+  }
+
+  updateProfile(firstName: string, lastName: string, email: string, phone: number, userId: string, token: string) {
+    const options = this.setHeader(token)
+    return this.http.patch(SITE + PROFILE + userId + '/', {
+      first_name: firstName,
+      last_name: lastName,
+      email: email,
+      phone: phone,
+    }, {headers: options})
   }
 
   private setHeader(token: string) {
-    return  new HttpHeaders({
+    return new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });

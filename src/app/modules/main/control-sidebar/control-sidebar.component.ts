@@ -45,17 +45,14 @@ export class ControlSidebarComponent implements OnInit {
     }
 
     public handleDarkModeChange(event: any) {
-        console.log('value', event.target.checked);
         this.store.dispatch(new ToggleDarkMode());
     }
 
     public onNavbarVariantChange(event: any) {
-        console.log('value', event.target.value);
         this.store.dispatch(new SetNavbarVariant(event.target.value));
     }
 
     public onSidebarSkinChange(event: any) {
-        console.log('value', event.target.value);
         this.store.dispatch(new SetSidebarSkin(event.target.value));
     }
 }

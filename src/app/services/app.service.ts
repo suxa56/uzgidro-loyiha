@@ -5,12 +5,12 @@ import {ApiService} from "@services/api.service";
 import {CookieOptions, CookieService} from "ngx-cookie-service";
 import {AuthResponse} from "@/store/state";
 import * as jwtDecode from 'jwt-decode';
+import {catchError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
-  public user: number = null;
   token = this.cookie.get('jwt')
 
   constructor(private router: Router, private toastr: ToastrService, private apiService: ApiService, private cookie: CookieService) {
@@ -19,7 +19,6 @@ export class AppService {
   getCategories() {
     this.apiService.getCategories(this.token).subscribe({
       next: response => {
-        console.log(response)
       },
       error: error => {
         console.error('Ошибка:', error);
@@ -72,44 +71,38 @@ export class AppService {
     // }
   }
 
-  getProfile() {
+  updateProfile({firstName, lastName, email, phone}) {
     if (this.token) {
-      this.apiService.getProfile(jwtDecode.jwtDecode(this.token)['user_id'], this.token).subscribe({
-        next: (response) => {
-          console.log(response)
-        },
-        error: error => {
-          console.error('Ошибка:', error);
-
-          // Если есть дополнительная информация об ошибке
-          if (error.error instanceof ErrorEvent) {
-            // Обработка ошибок на стороне клиента
-            console.error('Произошла ошибка:', error.error.message);
-          } else {
-            // Обработка ошибок на стороне сервера
-            console.error(`Код ошибки ${error.status}, ` + `Текст ошибки: ${error.error}`);
-          }
-          this.toastr.error(error, 'Ошибка при запросе данных')
-        },
-        complete: () => {
-        }
-      })
+      return this.apiService.updateProfile(firstName, lastName, email, phone.replace(/\D/g, ''), jwtDecode.jwtDecode(this.token)['user_id'], this.token).pipe(
+        catchError((error) => {
+          this.toastr.error(error.message, 'Ошибка при отправке данных')
+          return [];
+        })
+      )
     }
   }
 
-  getToken() {
-    if (this.cookie.check('jwt')) {
-      return jwtDecode.jwtDecode(this.cookie.get('jwt')).exp < new Date().getTime()
-    } else {
-      this.logout()
-      return false
+  getProfile() {
+    if (this.token) {
+      return this.apiService.getProfile(jwtDecode.jwtDecode(this.token)['user_id'], this.token).pipe(
+        catchError((error) => {
+          this.toastr.error(error.message, 'Ошибка при запросе данных')
+          return [];
+        })
+      )
     }
+  }
+
+  isTokenValid() {
+    if (this.cookie.check('jwt') && jwtDecode.jwtDecode(this.cookie.get('jwt')).exp < new Date().getTime()) {
+      return true
+    }
+    this.logout()
+    return false
   }
 
   logout() {
-    // this.api.logout()
     this.setToken(null)
-    this.user = null;
     this.router.navigate(['/login']);
   }
 

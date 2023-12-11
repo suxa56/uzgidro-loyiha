@@ -10,7 +10,7 @@ import {HeaderComponent} from '@modules/main/header/header.component';
 import {FooterComponent} from '@modules/main/footer/footer.component';
 import {MenuSidebarComponent} from '@modules/main/menu-sidebar/menu-sidebar.component';
 import {BlankComponent} from '@pages/blank/blank.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ProfileComponent} from '@pages/profile/profile.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RegisterComponent} from '@modules/register/register.component';
@@ -34,59 +34,61 @@ import {authReducer} from './store/auth/reducer';
 import {uiReducer} from './store/ui/reducer';
 import {ProfabricComponentsModule} from '@profabric/angular-components';
 import {SidebarSearchComponent} from '@components/sidebar-search/sidebar-search.component';
-import { CreateProjectComponent } from '@pages/create-project/create-project.component';
-import { ProjectsComponent } from '@pages/projects/projects.component';
-import { ProjectItemComponent } from '@components/project-item/project-item.component';
-import { ConclusionComponent } from '@pages/conclusion/conclusion.component';
-import { DocsComponent } from '@pages/docs/docs.component';
+import {CreateProjectComponent} from '@pages/create-project/create-project.component';
+import {ProjectsComponent} from '@pages/projects/projects.component';
+import {ProjectItemComponent} from '@components/project-item/project-item.component';
+import {ConclusionComponent} from '@pages/conclusion/conclusion.component';
+import {DocsComponent} from '@pages/docs/docs.component';
 
 registerLocaleData(localeEn, 'en-EN');
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        MainComponent,
-        LoginComponent,
-        HeaderComponent,
-        FooterComponent,
-        MenuSidebarComponent,
-        BlankComponent,
-        ProfileComponent,
-        RegisterComponent,
-        DashboardComponent,
-        MessagesComponent,
-        NotificationsComponent,
-        UserComponent,
-        ForgotPasswordComponent,
-        RecoverPasswordComponent,
-        LanguageComponent,
-        MainMenuComponent,
-        SubMenuComponent,
-        MenuItemComponent,
-        ControlSidebarComponent,
-        SidebarSearchComponent,
-        CreateProjectComponent,
-        ProjectsComponent,
-        ProjectItemComponent,
-        ConclusionComponent,
-        DocsComponent
-    ],
-    imports: [
-        ProfabricComponentsModule,
-        CommonModule,
-        BrowserModule,
-        StoreModule.forRoot({auth: authReducer, ui: uiReducer}),
-        HttpClientModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        ToastrModule.forRoot({
-            timeOut: 3000,
-            positionClass: 'toast-top-right',
-            preventDuplicates: true
-        })
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    MainComponent,
+    LoginComponent,
+    HeaderComponent,
+    FooterComponent,
+    MenuSidebarComponent,
+    BlankComponent,
+    ProfileComponent,
+    RegisterComponent,
+    DashboardComponent,
+    MessagesComponent,
+    NotificationsComponent,
+    UserComponent,
+    ForgotPasswordComponent,
+    RecoverPasswordComponent,
+    LanguageComponent,
+    MainMenuComponent,
+    SubMenuComponent,
+    MenuItemComponent,
+    ControlSidebarComponent,
+    SidebarSearchComponent,
+    CreateProjectComponent,
+    ProjectsComponent,
+    ProjectItemComponent,
+    ConclusionComponent,
+    DocsComponent
+  ],
+  imports: [
+    ProfabricComponentsModule,
+    CommonModule,
+    BrowserModule,
+    StoreModule.forRoot({auth: authReducer, ui: uiReducer}),
+    HttpClientModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true
+    })
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}

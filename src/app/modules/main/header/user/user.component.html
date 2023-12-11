@@ -1,43 +1,45 @@
 <pf-dropdown hide-arrow class="user-menu">
-    <div slot="button">
-        <a class="nav-link">
-            <pf-image
-                src="assets/img/default-profile.png"
-                class="user-image-small"
-                width="25"
-                height="25"
-                alt="User Image"
-                rounded
-            ></pf-image>
-        </a>
-    </div>
-    <div slot="menu">
-        <li class="user-header bg-primary">
-            <pf-image
-                src="assets/img/default-profile.png"
-                class="user-image-big"
-                alt="User Image"
-                width="90"
-                height="90"
-                rounded
-            ></pf-image>
-
-            <p>
-                <span>Фотим Фотимович</span>
-                <small>
-                    <span class="mr-2">Должность:</span>
-                    <span>Ведущий специалист</span>
-                </small>
-            </p>
-        </li>
-        <!-- Menu Footer-->
-        <li class="user-footer">
-            <a [routerLink]="['/profile']" class="btn btn-default btn-flat">
-                Profile
-            </a>
-            <a (click)="logout()" class="btn btn-default btn-flat float-right">
-                Sign out
-            </a>
-        </li>
-    </div>
+  <div slot="button">
+    <a class="nav-link">
+      <pf-image
+        src="assets/img/default-profile.png"
+        class="user-image-small"
+        width="25"
+        height="25"
+        alt="User Image"
+        rounded
+      ></pf-image>
+    </a>
+  </div>
+  <div slot="menu">
+    <li class="user-header bg-primary">
+      <pf-image
+        src="assets/img/default-profile.png"
+        class="user-image-big"
+        alt="User Image"
+        width="90"
+        height="90"
+        rounded
+      ></pf-image>
+      <p *ngIf="user" class="mt-0">
+        <span *ngIf="user.first_name && user.last_name; else emptyName">
+          {{ user.last_name }} {{ user.first_name }}
+        </span>
+      </p>
+    </li>
+    <!-- Menu Footer-->
+    <li class="user-footer">
+      <a [routerLink]="['/profile']" class="btn btn-default btn-flat">
+        Profil
+      </a>
+      <a (click)="logout()" class="btn btn-default btn-flat float-right">
+        Chiqish
+      </a>
+    </li>
+  </div>
 </pf-dropdown>
+
+
+<ng-template #emptyName>
+  <p>Ism kiritilmagan, uni "Profil"da kiriting.</p>
+</ng-template>

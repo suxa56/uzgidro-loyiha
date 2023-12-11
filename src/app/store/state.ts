@@ -22,3 +22,8 @@ export interface User {
   email: string | null,
   image: string | null
 }
+
+export interface Categories {
+  id: number,
+  name: string
+}

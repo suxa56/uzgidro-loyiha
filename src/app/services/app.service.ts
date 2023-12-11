@@ -6,6 +6,7 @@ import {CookieOptions, CookieService} from "ngx-cookie-service";
 import {AuthResponse} from "@/store/state";
 import * as jwtDecode from 'jwt-decode';
 import {catchError} from "rxjs";
+import FormData from "form-data";
 
 @Injectable({
   providedIn: 'root'
@@ -17,25 +18,12 @@ export class AppService {
   }
 
   getCategories() {
-    this.apiService.getCategories(this.token).subscribe({
-      next: response => {
-      },
-      error: error => {
-        console.error('Ошибка:', error);
-
-        // Если есть дополнительная информация об ошибке
-        if (error.error instanceof ErrorEvent) {
-          // Обработка ошибок на стороне клиента
-          console.error('Произошла ошибка:', error.error.message);
-        } else {
-          // Обработка ошибок на стороне сервера
-          console.error(`Код ошибки ${error.status}, ` + `Текст ошибки: ${error.error}`);
-        }
-        this.toastr.error(error, 'Ошибка при запросе данных')
-      },
-      complete: () => {
-      }
-    })
+    return this.apiService.getCategories(this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при получении данных')
+        return [];
+      })
+    )
   }
 
   loginByAuth({username, password}) {
@@ -91,6 +79,22 @@ export class AppService {
         })
       )
     }
+  }
+
+  createDocs(code: string, categoryId: number, files: Record<string, File>) {
+    const formData = new FormData()
+    formData.append('categories', categoryId)
+    formData.append('file_code', code)
+    formData.append('decision_files', files['decision'])
+    formData.append('calendar_files', files['calendar'])
+    formData.append('contract_files', files['contract'])
+    formData.append('additional_files', files['addition'])
+    return this.apiService.createDocs(formData, this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при запросе данных')
+        return [];
+      })
+    )
   }
 
   isTokenValid() {

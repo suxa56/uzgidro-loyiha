@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
   loading = false
 
   constructor(private appService: AppService,
-              private toastr: ToastrService,) {
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -68,22 +68,17 @@ export class ProfileComponent implements OnInit {
       formatted = '+998';
     }
 
-    this.profileForm.setValue({
-      firstName: this.profileForm.get('firstName').value,
-      lastName: this.profileForm.get('lastName').value,
-      email: this.profileForm.get('email').value,
-      phone: formatted
-    })
+    this.profileForm.get('phone').setValue(formatted)
   }
 
   updateProfile() {
     if (this.profileForm.valid) {
       this.loading = true
       this.appService.updateProfile(this.profileForm.value).subscribe({
-        next: value => {
+        next: _ => {
           this.toastr.success('', 'Profil yangilandi')
         },
-        error: error => {
+        error: _ => {
           this.toastr.error('', 'Profil yangilanmadi')
         },
         complete: () => {

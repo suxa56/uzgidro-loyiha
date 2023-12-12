@@ -43,12 +43,12 @@ export class DocsComponent implements OnInit {
     })
 
     this.docsForm = new FormGroup({
-      category: new FormControl(null),
-      code: new FormControl(null),
-      decision: new FormControl(null),
-      calendar: new FormControl(null),
-      contract: new FormControl(null),
-      addition: new FormControl(null),
+      category: new FormControl(null, Validators.required),
+      code: new FormControl(null, Validators.required),
+      decision: new FormControl(null, Validators.required),
+      calendar: new FormControl(null, Validators.required),
+      contract: new FormControl(null, Validators.required),
+      addition: new FormControl(null, Validators.required)
     })
   }
 
@@ -65,7 +65,7 @@ export class DocsComponent implements OnInit {
       this.loading = true
       this.appService.createDocs(this.docsForm.get('code').value, this.selectedCategoryId, this.files).subscribe({
         next: response => {
-          console.log(response)
+          // console.log(response)
           this.toastr.success('', 'Hujjat jonatildi')
         },
         error: _ => {
@@ -76,7 +76,7 @@ export class DocsComponent implements OnInit {
         }
       })
     } else {
-      this.toastr.error('', 'Hujjat notog\'ri kiritildi')
+      this.toastr.warning('', 'Hujjat notog\'ri kiritildi')
     }
   }
 

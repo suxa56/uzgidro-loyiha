@@ -47,7 +47,6 @@ export class ApiService {
 
   private setFileHeader(token: string) {
     return {headers: new HttpHeaders({
-        'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer ${token}`
       })};
   }

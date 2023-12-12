@@ -12,7 +12,13 @@ import FormData from "form-data";
   providedIn: 'root'
 })
 export class AppService {
-  token = this.cookie.get('jwt')
+
+  private _token = this.cookie.get('jwt')
+  get token(): string {
+    if (this.isTokenValid()) {
+      return this._token
+    }
+  }
 
   constructor(private router: Router, private toastr: ToastrService, private apiService: ApiService, private cookie: CookieService) {
   }
@@ -60,35 +66,31 @@ export class AppService {
   }
 
   updateProfile({firstName, lastName, email, phone}) {
-    if (this.token) {
-      return this.apiService.updateProfile(firstName, lastName, email, phone.replace(/\D/g, ''), jwtDecode.jwtDecode(this.token)['user_id'], this.token).pipe(
-        catchError((error) => {
-          this.toastr.error(error.message, 'Ошибка при отправке данных')
-          return [];
-        })
-      )
-    }
+    return this.apiService.updateProfile(firstName, lastName, email, phone.replace(/\D/g, ''), jwtDecode.jwtDecode(this.token)['user_id'], this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
   }
 
   getProfile() {
-    if (this.token) {
-      return this.apiService.getProfile(jwtDecode.jwtDecode(this.token)['user_id'], this.token).pipe(
-        catchError((error) => {
-          this.toastr.error(error.message, 'Ошибка при запросе данных')
-          return [];
-        })
-      )
-    }
+    return this.apiService.getProfile(jwtDecode.jwtDecode(this.token)['user_id'], this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при запросе данных')
+        return [];
+      })
+    )
   }
 
   createDocs(code: string, categoryId: number, files: Record<string, File>) {
     const formData = new FormData()
     formData.append('categories', categoryId)
     formData.append('file_code', code)
-    formData.append('decision_files', files['decision'])
-    formData.append('calendar_files', files['calendar'])
-    formData.append('contract_files', files['contract'])
-    formData.append('additional_files', files['addition'])
+    formData.append('decision_files', files['decision'], files['decision'].name)
+    formData.append('calendar_files', files['calendar'], files['calendar'].name)
+    formData.append('contract_files', files['contract'], files['contract'].name)
+    formData.append('additional_files', files['addition'], files['addition'].name)
     return this.apiService.createDocs(formData, this.token).pipe(
       catchError((error) => {
         this.toastr.error(error.message, 'Ошибка при запросе данных')
@@ -98,7 +100,7 @@ export class AppService {
   }
 
   isTokenValid() {
-    if (this.cookie.check('jwt') && jwtDecode.jwtDecode(this.cookie.get('jwt')).exp < new Date().getTime()) {
+    if (this.cookie.check('jwt') && jwtDecode.jwtDecode(this.cookie.get('jwt')).exp * 1000 > new Date().getTime()) {
       return true
     }
     this.logout()

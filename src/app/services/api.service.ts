@@ -10,6 +10,8 @@ const CREATE_PROJECT_FILES = 'designer/project-file-create/'
 const GET_PROJECT_FILE_LIST = 'designer/project-file-list/'
 const CREATE_PROJECT = 'designer/all-files-create/'
 const GET_ALL_PROJECTS = 'designer/all-files/'
+const GET_APPROVED_PROJECTS = 'designer/allowed-file/'
+const GET_REJECTED_PROJECTS = 'designer/reject-file/'
 
 @Injectable({
   providedIn: 'root'
@@ -60,19 +62,33 @@ export class ApiService {
 
   getProjects(token: string) {
     const options = this.setHeader(token)
-    return this.http.get(SITE+GET_ALL_PROJECTS, options)
+    return this.http.get(SITE + GET_ALL_PROJECTS, options)
+  }
+
+  getApprovedProjects(token: string) {
+    const options = this.setHeader(token)
+    return this.http.get(SITE + GET_APPROVED_PROJECTS, options)
+  }
+
+  getRejectedProjects(token: string) {
+    const options = this.setHeader(token)
+    return this.http.get(SITE + GET_REJECTED_PROJECTS, options)
   }
 
   private setFileHeader(token: string) {
-    return {headers: new HttpHeaders({
+    return {
+      headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
-      })};
+      })
+    };
   }
 
   private setHeader(token: string) {
-    return {headers: new HttpHeaders({
+    return {
+      headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
-      })};
+      })
+    };
   }
 }

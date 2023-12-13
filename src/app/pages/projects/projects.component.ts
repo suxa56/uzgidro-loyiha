@@ -16,30 +16,43 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit() {
     if (this.router.url === '/rejected') {
-      return;
+      this.appService.getApprovedProjects().subscribe({
+        next: (response: ProjectsResponse[]) => {
+          this.setProjects(response)
+        }
+      })
+    } else if (this.router.url === '/approved') {
+      this.appService.getRejectedProjects().subscribe({
+        next: (response: ProjectsResponse[]) => {
+          this.setProjects(response)
+        }
+      })
+    } else {
+      this.appService.getProjects().subscribe({
+        next: (response: ProjectsResponse[]) => {
+          this.setProjects(response)
+        }
+      })
     }
-    if (this.router.url === '/approved') {
-      return;
+  }
+
+  private setProjects(response: ProjectsResponse[]) {
+    this.projects = response.map(project => {
+      return this.mapResponseToDto(project)
+    });
+  }
+
+  private mapResponseToDto(project: ProjectsResponse) {
+    const accepted = (!project.is_redirect_designer && !project.is_active_designer)
+      ? null : (!project.is_active_designer && project.is_redirect_designer)
+    const dto: ProjectsDto = {
+      graphicNumber: project.graphic_number,
+      archiveNumber: project.arxiv_number,
+      workingProjectName: project.working_project_name,
+      createdAt: new Date(project.created_add),
+      isAccepted: accepted
     }
-
-    this.appService.getProjects().subscribe({
-      next: (response: ProjectsResponse[]) => {
-        this.projects = response.map(project => {
-          const accepted = (!project.is_redirect_designer && !project.is_active_designer)
-            ? null : !(!project.is_active_designer && project.is_redirect_designer)
-
-          return {
-            graphicNumber: project.graphic_number,
-            archiveNumber: project.arxiv_number,
-            workingProjectName: project.working_project_name,
-            createdAt: new Date(project.created_add),
-            isAccepted: accepted,
-          }
-        })
-      },
-      complete: () => {
-      }
-    })
+    return dto
   }
 
 }

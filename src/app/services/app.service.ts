@@ -83,15 +83,8 @@ export class AppService {
     )
   }
 
-  createDocs(code: string, categoryId: number, files: Record<string, File>) {
-    const formData = new FormData()
-    formData.append('categories', categoryId)
-    formData.append('file_code', code)
-    formData.append('decision_files', files['decision'], files['decision'].name)
-    formData.append('calendar_files', files['calendar'], files['calendar'].name)
-    formData.append('contract_files', files['contract'], files['contract'].name)
-    formData.append('additional_files', files['addition'], files['addition'].name)
-    return this.apiService.createDocs(formData, this.token).pipe(
+  getProjectFiles() {
+    return this.apiService.getProjectFiles(this.token).pipe(
       catchError((error) => {
         this.toastr.error(error.message, 'Ошибка при запросе данных')
         return [];
@@ -99,6 +92,40 @@ export class AppService {
     )
   }
 
+  submitProjectFiles(code: string, categoryId: number, files: Record<string, File>) {
+    const formData = new FormData()
+    formData.append('categories', categoryId)
+    formData.append('file_code', code)
+    formData.append('decision_files', files['decision'], files['decision'].name)
+    formData.append('calendar_files', files['calendar'], files['calendar'].name)
+    formData.append('contract_files', files['contract'], files['contract'].name)
+    formData.append('additional_files', files['addition'], files['addition'].name)
+    return this.apiService.createProjectFiles(formData, this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
+  submitProject(projectFileId: number, {graphic, archive, worker, subject}, files: Record<string, File>) {
+    const formData = new FormData()
+    formData.append('subject', projectFileId)
+    formData.append('graphic_number', graphic)
+    formData.append('working_project_name', worker)
+    formData.append('arxiv_number', archive)
+    formData.append('subject', subject)
+    formData.append('file_pdf', files['projectPdf'])
+    formData.append('file_autocad', files['projectAutocad'])
+    formData.append('simeta_pdf', files['estimatePdf'])
+    formData.append('simeta_autocad', files['estimateExcel'])
+    return this.apiService.createProject(formData, this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
   isTokenValid() {
     if (this.cookie.check('jwt') && jwtDecode.jwtDecode(this.cookie.get('jwt')).exp * 1000 > new Date().getTime()) {
       return true

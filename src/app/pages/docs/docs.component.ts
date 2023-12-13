@@ -60,10 +60,10 @@ export class DocsComponent implements OnInit {
     }
   }
 
-  createDocs() {
+  sendProjectFiles() {
     if (this.docsForm.valid) {
       this.loading = true
-      this.appService.createDocs(this.docsForm.get('code').value, this.selectedCategoryId, this.files).subscribe({
+      this.appService.submitProjectFiles(this.docsForm.get('code').value, this.selectedCategoryId, this.files).subscribe({
         next: response => {
           // console.log(response)
           this.toastr.success('', 'Hujjat jonatildi')

@@ -6,7 +6,9 @@ const SITE = 'https://4-sqd.uz/api/'
 const LOGIN = 'login/'
 const PROFILE = 'profile/'
 const CATEGORIES = 'designer/categories/'
-const CREATE_DOCS = 'designer/project-file-create/'
+const CREATE_PROJECT_FILES = 'designer/project-file-create/'
+const GET_PROJECT_FILE_LIST = 'designer/project-file-list/'
+const CREATE_PROJECT = 'designer/all-files-create/'
 
 @Injectable({
   providedIn: 'root'
@@ -40,9 +42,19 @@ export class ApiService {
     }, options)
   }
 
-  createDocs(formData: FormData, token: string) {
+  createProjectFiles(formData: FormData, token: string) {
     const options = this.setFileHeader(token)
-    return this.http.post(SITE + CREATE_DOCS, formData, options)
+    return this.http.post(SITE + CREATE_PROJECT_FILES, formData, options)
+  }
+
+  getProjectFiles(token: string) {
+    const options = this.setHeader(token)
+    return this.http.get(SITE + GET_PROJECT_FILE_LIST, options)
+  }
+
+  createProject(formData: FormData, token: string) {
+    const options = this.setFileHeader(token)
+    return this.http.post(SITE + CREATE_PROJECT, formData, options)
   }
 
   private setFileHeader(token: string) {

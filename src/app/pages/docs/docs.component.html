@@ -22,7 +22,7 @@
   <!-- Default box -->
   <div class="container-fluid">
     <div class="card">
-      <form [formGroup]="docsForm" (ngSubmit)="createDocs()">
+      <form [formGroup]="docsForm" (ngSubmit)="sendProjectFiles()">
         <div class="flex flex-row border-b border-slate-300 py-3 px-4 justify-between items-center">
           <div class="card-title outline-0" (click)="toggleMenu()">
             <input formControlName="category" class="card-title outline-0" placeholder="Ob'yekt nomi tanlang"/>

@@ -16,18 +16,23 @@
   <tbody *ngFor="let project of projects; index as i">
   <tr>
     <td>{{i+1}}</td>
-    <td>{{project.gruffNumber}}</td>
+    <td>{{project.graphicNumber}}</td>
     <td>{{project.archiveNumber}}</td>
-    <td>{{project.executor}}</td>
+    <td>{{project.workingProjectName}}</td>
     <td><i class="fa-solid fa-file-pdf"></i></td>
     <td><i class="fa-solid fa-file-invoice"></i></td>
     <td><i class="fa-solid fa-file-pdf"></i></td>
     <td><i class="fa-solid fa-file-excel"></i></td>
-    <td>{{project.date | date:'dd-MM-yyyy'}}</td>
+    <td>{{project.createdAt | date:'dd-MM-yyyy'}}</td>
     <td [ngClass]="{
-      'text-red-600': project.status == 'Rad etilgan',
-      'text-green-600': project.status == 'Qabul qilingan'
-    }">{{project.status}}</td>
+      'text-red-600': !project.isAccepted ,
+      'text-slate-600': project.isAccepted === null,
+      'text-green-600': project.isAccepted
+    }" [ngSwitch]="project.isAccepted">
+      <p *ngSwitchCase="null">Tekshirishda</p>
+      <p *ngSwitchCase="true">Qabul qilingan</p>
+      <p *ngSwitchCase="false">Rad etilgan</p>
+    </td>
   </tr>
   </tbody>
 </table>

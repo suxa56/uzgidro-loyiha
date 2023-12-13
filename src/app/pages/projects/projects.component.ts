@@ -1,58 +1,45 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {AppService} from "@services/app.service";
+import {ProjectsDto, ProjectsResponse} from "@/store/state";
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss']
 })
-export class ProjectsComponent implements OnInit{
-  projects = [
-    {gruffNumber: 1,
-    archiveNumber: 1,
-    executor: 'Ma\'rufov Ma\'ruf',
-    date: new Date(2023, 9, 11),
-    status: 'Qabul qilingan'},
-    {gruffNumber: 2,
-    archiveNumber: 2,
-    executor: 'Azamatov Azamat',
-    date: new Date(2023, 9, 12),
-    status: 'Qabul qilingan'},
-    {gruffNumber: 3,
-    archiveNumber: 3,
-    executor: 'Nishonov Nishon',
-    date: new Date(2023, 9, 13),
-    status: 'Rad etilgan'},
-    {gruffNumber: 4,
-    archiveNumber: 4,
-    executor: 'Temurov Temur',
-    date: new Date(2023, 9, 15),
-    status: 'Rad etilgan'},
-    {gruffNumber: 5,
-    archiveNumber: 5,
-    executor: 'Umarov Umar',
-    date: new Date(2023, 9, 20),
-    status: 'Qabul qilingan'}
-  ]
+export class ProjectsComponent implements OnInit {
+  projects: ProjectsDto[]
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private appService: AppService) {
   }
 
   ngOnInit() {
     if (this.router.url === '/rejected') {
-      for (let i = this.projects.length - 1; i >= 0; i--) {
-        if (this.projects[i].status === 'Qabul qilingan') {
-          this.projects.splice(i, 1);
-        }
-      }
+      return;
     }
     if (this.router.url === '/approved') {
-      for (let i = this.projects.length - 1; i >= 0; i--) {
-        if (this.projects[i].status === 'Rad etilgan') {
-          this.projects.splice(i, 1);
-        }
-      }
+      return;
     }
+
+    this.appService.getProjects().subscribe({
+      next: (response: ProjectsResponse[]) => {
+        this.projects = response.map(project => {
+          const accepted = (!project.is_redirect_designer && !project.is_active_designer)
+            ? null : !(!project.is_active_designer && project.is_redirect_designer)
+
+          return {
+            graphicNumber: project.graphic_number,
+            archiveNumber: project.arxiv_number,
+            workingProjectName: project.working_project_name,
+            createdAt: new Date(project.created_add),
+            isAccepted: accepted,
+          }
+        })
+      },
+      complete: () => {
+      }
+    })
   }
 
 }

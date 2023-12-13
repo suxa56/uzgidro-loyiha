@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {ProjectsDto} from "@/store/state";
 
 @Component({
   selector: 'app-project-item',
@@ -6,5 +7,5 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./project-item.component.scss']
 })
 export class ProjectItemComponent {
-  @Input() projects
+  @Input() projects: ProjectsDto[]
 }

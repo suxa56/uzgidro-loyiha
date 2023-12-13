@@ -108,9 +108,18 @@ export class AppService {
     )
   }
 
+  getProjects() {
+    return this.apiService.getProjects(this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
   submitProject(projectFileId: number, {graphic, archive, worker, subject}, files: Record<string, File>) {
     const formData = new FormData()
-    formData.append('subject', projectFileId)
+    formData.append('project_files', projectFileId)
     formData.append('graphic_number', graphic)
     formData.append('working_project_name', worker)
     formData.append('arxiv_number', archive)

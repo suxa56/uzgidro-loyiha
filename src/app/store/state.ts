@@ -10,21 +10,21 @@ export interface AuthResponse {
 }
 
 export interface UserResponse {
-  message: string,
+  message: string
   data: User
 }
 
 export interface User {
-  id: number,
-  first_name: string | null,
-  last_name: string | null,
-  phone: string | null,
-  email: string | null,
+  id: number
+  first_name: string | null
+  last_name: string | null
+  phone: string | null
+  email: string | null
   image: string | null
 }
 
 export interface Categories {
-  id: number,
+  id: number
   name: string
 }
 
@@ -39,4 +39,27 @@ export interface ProjectFilesResponse {
   updated_at: string
   user: {id: number, username: string}
   categories: {id: number, name: string}
+}
+
+export interface ProjectsResponse {
+  id: number
+  arxiv_number: string
+  graphic_number: string
+  working_project_name: string
+  file_autocad: string
+  file_pdf: string
+  simeta_pdf: string
+  simeta_autocad: string
+  created_add: string
+  is_redirect_designer: boolean
+  is_active_designer: boolean
+  project_files: ProjectFilesResponse
+}
+
+export interface ProjectsDto {
+  archiveNumber: string
+  graphicNumber: string
+  workingProjectName: string
+  createdAt: Date
+  isAccepted?: boolean
 }

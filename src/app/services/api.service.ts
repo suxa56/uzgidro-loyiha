@@ -9,6 +9,7 @@ const CATEGORIES = 'designer/categories/'
 const CREATE_PROJECT_FILES = 'designer/project-file-create/'
 const GET_PROJECT_FILE_LIST = 'designer/project-file-list/'
 const CREATE_PROJECT = 'designer/all-files-create/'
+const GET_ALL_PROJECTS = 'designer/all-files/'
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +56,11 @@ export class ApiService {
   createProject(formData: FormData, token: string) {
     const options = this.setFileHeader(token)
     return this.http.post(SITE + CREATE_PROJECT, formData, options)
+  }
+
+  getProjects(token: string) {
+    const options = this.setHeader(token)
+    return this.http.get(SITE+GET_ALL_PROJECTS, options)
   }
 
   private setFileHeader(token: string) {

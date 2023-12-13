@@ -19,6 +19,9 @@ export class AppService {
       return this._token
     }
   }
+  set token(jwt: string) {
+    this._token = jwt;
+  }
 
   constructor(private router: Router, private toastr: ToastrService, private apiService: ApiService, private cookie: CookieService) {
   }
@@ -159,6 +162,7 @@ export class AppService {
         expires: token.exp
       }
       this.cookie.set('jwt', response.access, options)
+      this.token = this.cookie.get('jwt')
     } else {
       this.cookie.deleteAll()
     }

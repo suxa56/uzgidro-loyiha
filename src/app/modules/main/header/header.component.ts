@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
     @HostBinding('class') classes: string = BASE_CLASSES;
     public ui: Observable<UiState>;
     public searchForm: UntypedFormGroup;
+    sectionName: string
 
     constructor(
         private appService: AppService,
@@ -31,6 +32,12 @@ export class HeaderComponent implements OnInit {
         this.searchForm = new UntypedFormGroup({
             search: new UntypedFormControl(null)
         });
+
+        this.appService.getSectionName().subscribe({
+          next: (response: {data: {section_name: string}}) => {
+            this.sectionName = response.data.section_name
+          }
+        })
     }
 
     logout() {

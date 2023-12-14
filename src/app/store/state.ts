@@ -7,6 +7,17 @@ export interface AppState {
 
 export interface AuthResponse {
   access: string
+  refresh: string
+  id: number
+  is_builder: boolean
+  is_chief_director: boolean
+  is_chief_supervisor: boolean
+  is_designer: boolean
+  is_director: boolean
+  is_pto: boolean
+  is_supervisor: boolean
+  is_tex_supervisor: boolean
+  is_uzg: boolean
 }
 
 export interface UserResponse {

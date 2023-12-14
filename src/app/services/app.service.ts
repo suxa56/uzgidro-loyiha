@@ -26,6 +26,15 @@ export class AppService {
   constructor(private router: Router, private toastr: ToastrService, private apiService: ApiService, private cookie: CookieService) {
   }
 
+  getSectionName() {
+    return this.apiService.getSectionName(jwtDecode.jwtDecode(this.token)['user_id'], this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при запросе данных')
+        return [];
+      })
+    )
+  }
+
   getCategories() {
     return this.apiService.getCategories(this.token).pipe(
       catchError((error) => {
@@ -39,6 +48,7 @@ export class AppService {
     try {
       this.apiService.loginByAuth({username, password}).subscribe({
         next: (response: AuthResponse) => {
+          console.log(response)
           if (response) {
             this.setToken(response)
             this.toastr.success('Login success');
@@ -179,10 +189,44 @@ export class AppService {
         domain: undefined,
         expires: token.exp
       }
+      this.cookie.set('role', this.setRole(response), new Date(token.exp*1000))
       this.cookie.set('jwt', response.access, options)
+      console.log(this.cookie.get('role'))
       this.token = this.cookie.get('jwt')
     } else {
       this.cookie.deleteAll()
     }
+  }
+
+  private setRole(response: AuthResponse) {
+    let role: string
+    if (response.is_builder) {
+      role = 'builder'
+    }
+    if (response.is_pto) {
+      role = 'pto'
+    }
+    if (response.is_uzg) {
+      role = 'uzg'
+    }
+    if (response.is_director) {
+      role = 'director'
+    }
+    if (response.is_designer) {
+      role = 'designer'
+    }
+    if (response.is_supervisor) {
+      role = 'supervisor'
+    }
+    if (response.is_chief_director) {
+      role = 'chiefDirector'
+    }
+    if (response.is_chief_supervisor) {
+      role = 'chiefSupervisor'
+    }
+    if (response.is_tex_supervisor) {
+      role = 'tex_supervisor'
+    }
+    return role
   }
 }

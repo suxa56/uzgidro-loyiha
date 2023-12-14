@@ -5,11 +5,11 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 
 @Component({
-  selector: 'app-docs',
-  templateUrl: './docs.component.html',
-  styleUrls: ['./docs.component.scss']
+  selector: 'app-create-docs',
+  templateUrl: './create-docs.component.html',
+  styleUrls: ['./create-docs.component.scss']
 })
-export class DocsComponent implements OnInit {
+export class CreateDocsComponent implements OnInit {
   isMenuOpen = false;
   categories: Categories[]
   docsForm: FormGroup

@@ -35,7 +35,7 @@ export const MENU = [
   {
     name: 'Birlamchi hujjatlar',
     iconClasses: 'fa-solid fa-file-circle-plus',
-    path: ['/docs']
+    path: ['/create-docs']
   },
   {
     name: 'Loyiha kiritish',

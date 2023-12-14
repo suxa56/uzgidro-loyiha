@@ -12,6 +12,7 @@ const CREATE_PROJECT = 'designer/all-files-create/'
 const GET_ALL_PROJECTS = 'designer/all-files/'
 const GET_APPROVED_PROJECTS = 'designer/allowed-file/'
 const GET_REJECTED_PROJECTS = 'designer/reject-file/'
+const GET_SECTION = 'section_name/'
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,11 @@ export class ApiService {
 
   loginByAuth({username, password}) {
     return this.http.post(SITE + LOGIN, {username: username, password: password})
+  }
+
+  getSectionName(userId: number, token: string) {
+    const options = this.setHeader(token)
+    return this.http.get(SITE + GET_SECTION + userId + '/', options)
   }
 
   getCategories(token: string) {

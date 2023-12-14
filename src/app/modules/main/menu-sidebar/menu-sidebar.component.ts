@@ -15,7 +15,8 @@ const BASE_CLASSES = 'main-sidebar elevation-4';
 export class MenuSidebarComponent implements OnInit {
   @HostBinding('class') classes: string = BASE_CLASSES;
   public ui: Observable<UiState>;
-  public menu = MENU;
+  public menu = null;
+  role: string
 
   constructor(
     public appService: AppService,
@@ -28,38 +29,56 @@ export class MenuSidebarComponent implements OnInit {
     this.ui.subscribe((state: UiState) => {
       this.classes = `${BASE_CLASSES} ${state.sidebarSkin}`;
     });
+    this.role = this.appService.role
+    this.setupMenu()
+  }
+
+  private setupMenu() {
+    this.menu = MENU.filter(item => item.role.includes(this.role))
   }
 }
 
 export const MENU = [
   {
-    name: 'Birlamchi hujjatlar',
+    name: 'Birlamchi hujjatlarni kiritish',
     iconClasses: 'fa-solid fa-file-circle-plus',
+    role: 'designer',
     path: ['/create-docs']
+  },
+  {
+    name: 'Birlamchi hujjatlar',
+    iconClasses: 'fa-solid fa-files',
+    role: 'supervisor',
+    path: ['/docs']
   },
   {
     name: 'Loyiha kiritish',
     iconClasses: 'fa-solid fa-file-circle-plus',
+    role: 'designer',
     path: ['/create']
   },
   {
     name: 'Barcha loyihalar',
     iconClasses: 'fa-solid fa-files',
+    role: 'designer,supervisor',
     path: ['/projects']
   },
   {
     name: 'Qabul qilingan loyihalar',
     iconClasses: 'fa-solid fa-file-check',
+    role: 'designer,supervisor',
     path: ['/approved']
   },
   {
     name: 'Rad etilgan loyihalar',
     iconClasses: 'fa-solid fa-file-xmark',
+    role: 'designer,supervisor',
     path: ['/rejected']
   },
   {
     name: 'Xulosalar',
     iconClasses: 'fa-solid fa-ballot-check',
+    role: 'designer,supervisor',
     path: ['/conclusion']
   },
 ];

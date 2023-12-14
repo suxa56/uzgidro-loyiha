@@ -12,6 +12,7 @@ const CREATE_PROJECT = 'designer/all-files-create/'
 const GET_ALL_PROJECTS = 'designer/all-files/'
 const GET_APPROVED_PROJECTS = 'designer/allowed-file/'
 const GET_REJECTED_PROJECTS = 'designer/reject-file/'
+const GET_SUPERVISOR_PROJECT_FILES = 'designer/control-project-file-all/'
 const GET_SECTION = 'section_name/'
 
 @Injectable({
@@ -59,6 +60,10 @@ export class ApiService {
   getProjectFiles(token: string) {
     const options = this.setHeader(token)
     return this.http.get(SITE + GET_PROJECT_FILE_LIST, options)
+  }
+  getSupervisorProjectFiles(token: string) {
+    const options = this.setHeader(token)
+    return this.http.get(SITE + GET_SUPERVISOR_PROJECT_FILES, options)
   }
 
   createProject(formData: FormData, token: string) {

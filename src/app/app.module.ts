@@ -39,6 +39,8 @@ import {ProjectsComponent} from '@pages/projects/projects.component';
 import {ProjectItemComponent} from '@components/project-item/project-item.component';
 import {ConclusionComponent} from '@pages/conclusion/conclusion.component';
 import {CreateDocsComponent} from '@pages/create-docs/create-docs.component';
+import { DocsComponent } from '@pages/docs/docs.component';
+import { DocsItemComponent } from '@components/docs-item/docs-item.component';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -69,7 +71,9 @@ registerLocaleData(localeEn, 'en-EN');
     ProjectsComponent,
     ProjectItemComponent,
     ConclusionComponent,
-    CreateDocsComponent
+    CreateDocsComponent,
+    DocsComponent,
+    DocsItemComponent
   ],
   imports: [
     ProfabricComponentsModule,

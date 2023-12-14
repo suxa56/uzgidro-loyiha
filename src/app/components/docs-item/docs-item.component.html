@@ -1,0 +1,30 @@
+<table class="table table-auto">
+  <thead>
+  <tr>
+    <th>№</th>
+    <th>Ism</th>
+    <th>Bo'lim nomi</th>
+    <th>Obyekt nomi</th>
+    <th>Hujjat kodi</th>
+    <th>Qaror</th>
+    <th>Kalendar</th>
+    <th>Shartnoma</th>
+    <th>Qoshimcha fayl</th>
+    <th>Sana</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let doc of docs; index as i">
+  <tr>
+    <td>{{i+1}}</td>
+    <td>{{doc.user.username}}</td>
+    <td>{{doc.user.section_name}}</td>
+    <td>{{doc.categories.name}}</td>
+    <td>{{doc.file_code}}</td>
+    <td><i class="fa-solid fa-file"></i></td>
+    <td><i class="fa-solid fa-file"></i></td>
+    <td><i class="fa-solid fa-file"></i></td>
+    <td><i class="fa-solid fa-file"></i></td>
+    <td>{{doc.created_add | date:'dd-MM-yyyy'}}</td>
+  </tr>
+  </tbody>
+</table>

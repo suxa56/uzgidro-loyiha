@@ -48,7 +48,7 @@ export interface ProjectFilesResponse {
   created_add: string
   file_code: string
   updated_at: string
-  user: {id: number, username: string}
+  user: {id: number, username: string, section_name: string}
   categories: {id: number, name: string}
 }
 

@@ -2,6 +2,7 @@
 /.firebase
 /.github
 .firebaserc
+/public
 
 
 # compiled output

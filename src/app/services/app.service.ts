@@ -113,6 +113,15 @@ export class AppService {
     )
   }
 
+  getSupervisorProjectFiles() {
+    return this.apiService.getSupervisorProjectFiles(this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при запросе данных')
+        return [];
+      })
+    )
+  }
+
   submitProjectFiles(code: string, categoryId: number, files: Record<string, File>) {
     const formData = new FormData()
     formData.append('categories', categoryId)

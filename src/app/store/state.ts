@@ -67,6 +67,27 @@ export interface ProjectsResponse {
   project_files: ProjectFilesResponse
 }
 
+export interface SupervisorProjectsResponse {
+  id: number
+  user: {id: number, username: string, section_name: string}
+  project_files: {id: number, file_code: string}
+  arxiv_number: string
+  graphic_number: string
+  working_project_name: string
+  created_add: string
+}
+
+export interface SupervisorProjectsDto {
+  id: number
+  username: string
+  sectionName: string
+  fileCode: string
+  archiveNumber: string
+  graphicNumber: string
+  workingProjectName: string
+  createdAt: string
+}
+
 export interface ProjectsDto {
   archiveNumber: string
   graphicNumber: string

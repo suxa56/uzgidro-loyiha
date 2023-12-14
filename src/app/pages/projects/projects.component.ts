@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {AppService} from "@services/app.service";
-import {ProjectsDto, ProjectsResponse} from "@/store/state";
+import {ProjectsDto, ProjectsResponse, SupervisorProjectsDto, SupervisorProjectsResponse} from "@/store/state";
 
 @Component({
   selector: 'app-projects',
@@ -10,11 +10,36 @@ import {ProjectsDto, ProjectsResponse} from "@/store/state";
 })
 export class ProjectsComponent implements OnInit {
   projects: ProjectsDto[]
+  supervisorProjects: SupervisorProjectsDto[]
+  role: string
 
   constructor(private router: Router, private appService: AppService) {
   }
 
   ngOnInit() {
+    this.role = this.appService.role
+
+    if (this.role === 'supervisor') {
+      this.appService.getSupervisorProjects().subscribe({
+        next: (response: SupervisorProjectsResponse[]) => {
+          this.supervisorProjects = response.map(project => {
+            let fileCode = project.project_files ? project.project_files.file_code : ''
+            let dto: SupervisorProjectsDto = {
+              id: project.id,
+              archiveNumber: project.arxiv_number,
+              workingProjectName: project.working_project_name,
+              fileCode: fileCode,
+              username: project.user.username,
+              sectionName: project.user.section_name,
+              graphicNumber: project.graphic_number,
+              createdAt: project.created_add
+            }
+            return  dto
+          })
+        }
+      })
+    }
+
     if (this.router.url === '/rejected') {
       this.appService.getApprovedProjects().subscribe({
         next: (response: ProjectsResponse[]) => {

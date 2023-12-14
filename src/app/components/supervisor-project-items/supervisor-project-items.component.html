@@ -1,0 +1,26 @@
+<table class="table table-auto">
+  <thead>
+  <tr>
+    <th>№</th>
+    <th>Ism</th>
+    <th>Bo'lim nomi</th>
+    <th>Hujjat kodi</th>
+    <th>Graf raqami</th>
+    <th>Arxiv raqami</th>
+    <th>Ishchi loyiha nomi</th>
+    <th>Sana</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let project of projects; index as i">
+  <tr>
+    <td>{{i+1}}</td>
+    <td>{{project.username}}</td>
+    <td>{{project.sectionName}}</td>
+    <td>{{project.fileCode}}</td>
+    <td>{{project.graphicNumber}}</td>
+    <td>{{project.archiveNumber}}</td>
+    <td>{{project.workingProjectName}}</td>
+    <td>{{project.createdAt | date:'dd-MM-yyyy'}}</td>
+  </tr>
+  </tbody>
+</table>

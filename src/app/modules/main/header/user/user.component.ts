@@ -13,6 +13,8 @@ export class UserComponent implements OnInit {
   constructor(private appService: AppService) {
   }
 
+  role: string
+
   ngOnInit() {
     this.appService.getProfile().subscribe({
       next: (response: UserResponse) => {
@@ -33,6 +35,7 @@ export class UserComponent implements OnInit {
       complete: () => {
       }
     })
+    this.role = this.appService.role
   }
 
   logout() {

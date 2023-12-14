@@ -25,6 +25,9 @@
         <span *ngIf="user.first_name && user.last_name; else emptyName">
           {{ user.last_name }} {{ user.first_name }}
         </span>
+        <small *ngIf="role">
+          Lavozimi: {{role}}
+        </small>
       </p>
     </li>
     <!-- Menu Footer-->

@@ -14,13 +14,21 @@ import FormData from "form-data";
 export class AppService {
 
   private _token = this.cookie.get('jwt')
+  private _role = this.cookie.get('role')
   get token(): string {
     if (this.isTokenValid()) {
       return this._token
     }
   }
+  get role(): string {
+    return this._role;
+  }
+
   set token(jwt: string) {
     this._token = jwt;
+  }
+  set role(value: string) {
+    this._role = value;
   }
 
   constructor(private router: Router, private toastr: ToastrService, private apiService: ApiService, private cookie: CookieService) {
@@ -191,8 +199,8 @@ export class AppService {
       }
       this.cookie.set('role', this.setRole(response), new Date(token.exp*1000))
       this.cookie.set('jwt', response.access, options)
-      console.log(this.cookie.get('role'))
       this.token = this.cookie.get('jwt')
+      this.role = this.cookie.get('role')
     } else {
       this.cookie.deleteAll()
     }

@@ -66,13 +66,13 @@ export const MENU = [
   {
     name: 'Qabul qilingan loyihalar',
     iconClasses: 'fa-solid fa-file-check',
-    role: 'designer,supervisor',
+    role: 'designer',
     path: ['/approved']
   },
   {
     name: 'Rad etilgan loyihalar',
     iconClasses: 'fa-solid fa-file-xmark',
-    role: 'designer,supervisor',
+    role: 'designer',
     path: ['/rejected']
   },
   {

@@ -95,3 +95,37 @@ export interface ProjectsDto {
   createdAt: Date
   isAccepted?: boolean
 }
+
+export interface ProjectDetailResponse {
+  message: string
+  data: {
+    id: number
+    user: {id: number, username: string, section_name: string}
+    file_autocad: string
+    file_pdf: string
+    simeta_pdf: string
+    simeta_autocad: string
+    project_files: {id: number, file_code: string}
+    arxiv_number: string
+    graphic_number: string
+    created_add: string
+    subject: string
+    working_project_name: string
+  }
+}
+
+export interface ProjectDetailDto {
+  id: number
+  username: string
+  sectionName: string
+  fileCode: string
+  archiveNumber: string
+  graphicNumber: string
+  workingProjectName: string
+  subject: string
+  projectPdf: string
+  projectAutocad: string
+  estimatePdf:string
+  estimateExcel:string
+  createdAt: string
+}

@@ -9,6 +9,7 @@
     <th>Arxiv raqami</th>
     <th>Ishchi loyiha nomi</th>
     <th>Sana</th>
+    <th>Batafsil</th>
   </tr>
   </thead>
   <tbody *ngFor="let project of projects; index as i">
@@ -21,6 +22,7 @@
     <td>{{project.archiveNumber}}</td>
     <td>{{project.workingProjectName}}</td>
     <td>{{project.createdAt | date:'dd-MM-yyyy'}}</td>
+    <td><a [routerLink]="['/projects', project.id]"><i class="fa-solid fa-right-to-bracket"></i></a></td>
   </tr>
   </tbody>
 </table>

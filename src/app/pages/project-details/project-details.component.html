@@ -1,0 +1,77 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Loyihalar</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <!--          <li class="breadcrumb-item"><a href="#">Главная</a></li>-->
+          <!--          <li class="breadcrumb-item active">Проекты</li>-->
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <!-- Default box -->
+  <div class="container-fluid">
+    <div class="card">
+      <!--      <div class="card-header">-->
+      <!--        <h3 class="card-title">Loyihalar</h3>-->
+      <!--      </div>-->
+      <div *ngIf="project" class="card-body">
+        <table class="table table-auto">
+          <thead>
+          <tr>
+            <th>Ism</th>
+            <th>Bo'lim nomi</th>
+            <th>Birlamchi hujjat kodi</th>
+            <th>Graf raqami</th>
+            <th>Arxiv raqami</th>
+            <th>Ishchi loyiha nomi</th>
+            <th>Loyiha PDF</th>
+            <th>Loyiha Autocad</th>
+            <th>Smeta PDF</th>
+            <th>Smeta Excel</th>
+            <th>Sana</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>{{project.username}}</td>
+            <td>{{project.sectionName}}</td>
+            <td>{{project.fileCode}}</td>
+            <td>{{project.graphicNumber}}</td>
+            <td>{{project.archiveNumber}}</td>
+            <td>{{project.workingProjectName}}</td>
+            <td><i class="fa-solid fa-file-pdf"></i></td>
+            <td><i class="fa-solid fa-file-invoice"></i></td>
+            <td><i class="fa-solid fa-file-pdf"></i></td>
+            <td><i class="fa-solid fa-file-excel"></i></td>
+            <td>{{project.createdAt | date:'dd-MM-yyyy'}}</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div class="flex w-max h-fit mt-5 space-x-2">
+          <p>Xulosa:</p>
+          <textarea class="outline outline-slate-600 rounded p-2" cols="100" rows="5" [textContent]="project.subject"></textarea>
+        </div>
+      </div>
+      <!-- /.card-body -->
+    <div class="card-footer space-y-4">
+      <div class="flex flex-row justify-end space-x-2 m-3">
+        <button (click)="rejectProject()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-3 rounded disabled:bg-red-300">Rad etish</button>
+        <button (click)="acceptProject()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-3 rounded disabled:bg-green-300">Qabul qilish</button>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- /.card -->
+</section>
+<!-- /.content -->

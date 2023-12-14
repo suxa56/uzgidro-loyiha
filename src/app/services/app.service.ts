@@ -56,7 +56,6 @@ export class AppService {
     try {
       this.apiService.loginByAuth({username, password}).subscribe({
         next: (response: AuthResponse) => {
-          console.log(response)
           if (response) {
             this.setToken(response)
             this.toastr.success('Login success');
@@ -156,6 +155,15 @@ export class AppService {
     )
   }
 
+  getSupervisorProjectById(projectId: number) {
+    return this.apiService.getSupervisorProjectById(projectId, this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
   getApprovedProjects() {
     return this.apiService.getApprovedProjects(this.token).pipe(
       catchError((error) => {
@@ -192,6 +200,25 @@ export class AppService {
       })
     )
   }
+
+  acceptProject(projectId: number) {
+    return this.apiService.acceptProject(projectId, this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
+  rejectProject(projectId: number) {
+    return this.apiService.rejectProject(projectId, this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
   isTokenValid() {
     if (this.cookie.check('jwt') && jwtDecode.jwtDecode(this.cookie.get('jwt')).exp * 1000 > new Date().getTime()) {
       return true
@@ -220,7 +247,7 @@ export class AppService {
       this.token = this.cookie.get('jwt')
       this.role = this.cookie.get('role')
     } else {
-      this.cookie.deleteAll()
+      this.cookie.deleteAll('/')
     }
   }
 

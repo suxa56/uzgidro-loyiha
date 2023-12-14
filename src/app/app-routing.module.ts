@@ -13,6 +13,7 @@ import {ProjectsComponent} from "@pages/projects/projects.component";
 import {ConclusionComponent} from "@pages/conclusion/conclusion.component";
 import {CreateDocsComponent} from "@pages/create-docs/create-docs.component";
 import {DocsComponent} from "@pages/docs/docs.component";
+import {ProjectDetailsComponent} from "@pages/project-details/project-details.component";
 
 const routes: Routes = [
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
       {
         path: 'projects',
         component: ProjectsComponent
+      },
+      {
+        path: 'projects/:id',
+        component:ProjectDetailsComponent
       },
       {
         path: 'approved',

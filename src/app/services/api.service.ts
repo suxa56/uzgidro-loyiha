@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import FormData from "form-data";
 
 const SITE = 'https://4-sqd.uz/api/'
@@ -14,7 +14,9 @@ const GET_APPROVED_PROJECTS = 'designer/allowed-file/'
 const GET_REJECTED_PROJECTS = 'designer/reject-file/'
 const GET_SUPERVISOR_PROJECT_FILES = 'designer/control-project-file-all/'
 const GET_SUPERVISOR_PROJECTS = 'designer/control-allfiles/'
+const GET_SUPERVISOR_PROJECT = 'designer/control-file-detail/'
 const GET_SECTION = 'section_name/'
+const PATCH_ACCEPT_REJECT_PROJECT = 'designer/control-accept-reject/'
 
 @Injectable({
   providedIn: 'root'
@@ -30,17 +32,17 @@ export class ApiService {
 
   getSectionName(userId: number, token: string) {
     const options = this.setHeader(token)
-    return this.http.get(SITE + GET_SECTION + userId + '/', options)
+    return this.http.get(SITE + GET_SECTION + userId + '/', {headers: options})
   }
 
   getCategories(token: string) {
     const options = this.setHeader(token)
-    return this.http.get(SITE + CATEGORIES, options)
+    return this.http.get(SITE + CATEGORIES, {headers: options})
   }
 
   getProfile(userId: number, token: string) {
     const options = this.setHeader(token)
-    return this.http.get(SITE + PROFILE + userId + '/', options)
+    return this.http.get(SITE + PROFILE + userId + '/', {headers: options})
   }
 
   updateProfile(firstName: string, lastName: string, email: string, phone: number, userId: string, token: string) {
@@ -50,7 +52,7 @@ export class ApiService {
       last_name: lastName,
       email: email,
       phone: phone,
-    }, options)
+    }, {headers: options})
   }
 
   createProjectFiles(formData: FormData, token: string) {
@@ -60,11 +62,12 @@ export class ApiService {
 
   getProjectFiles(token: string) {
     const options = this.setHeader(token)
-    return this.http.get(SITE + GET_PROJECT_FILE_LIST, options)
+    return this.http.get(SITE + GET_PROJECT_FILE_LIST, {headers: options})
   }
+
   getSupervisorProjectFiles(token: string) {
     const options = this.setHeader(token)
-    return this.http.get(SITE + GET_SUPERVISOR_PROJECT_FILES, options)
+    return this.http.get(SITE + GET_SUPERVISOR_PROJECT_FILES, {headers: options})
   }
 
   createProject(formData: FormData, token: string) {
@@ -74,22 +77,42 @@ export class ApiService {
 
   getProjects(token: string) {
     const options = this.setHeader(token)
-    return this.http.get(SITE + GET_ALL_PROJECTS, options)
+    return this.http.get(SITE + GET_ALL_PROJECTS, {headers: options})
   }
 
   getSupervisorProjects(token: string) {
     const options = this.setHeader(token)
-    return this.http.get(SITE + GET_SUPERVISOR_PROJECTS, options)
+    return this.http.get(SITE + GET_SUPERVISOR_PROJECTS, {headers: options})
+  }
+
+  getSupervisorProjectById(projectId: number, token: string) {
+    const options = this.setHeader(token)
+    return this.http.get(SITE + GET_SUPERVISOR_PROJECT + projectId + '/', {headers: options})
   }
 
   getApprovedProjects(token: string) {
     const options = this.setHeader(token)
-    return this.http.get(SITE + GET_APPROVED_PROJECTS, options)
+    return this.http.get(SITE + GET_APPROVED_PROJECTS, {headers: options})
   }
 
   getRejectedProjects(token: string) {
     const options = this.setHeader(token)
-    return this.http.get(SITE + GET_REJECTED_PROJECTS, options)
+    return this.http.get(SITE + GET_REJECTED_PROJECTS, {headers: options})
+  }
+
+
+  acceptProject(projectId: number, token: string) {
+    const headers = this.setHeader(token)
+    const params = new HttpParams().append('accept', 'accept')
+    const options = {headers: headers, params: params}
+    return this.http.patch(SITE + PATCH_ACCEPT_REJECT_PROJECT + projectId + '/', {}, options)
+  }
+
+  rejectProject(projectId: number, token: string) {
+    const headers = this.setHeader(token)
+    const params = new HttpParams().append('reject', 'reject')
+    const options = {headers: headers, params: params}
+    return this.http.patch(SITE + PATCH_ACCEPT_REJECT_PROJECT + projectId + '/', {}, options)
   }
 
   private setFileHeader(token: string) {
@@ -101,11 +124,9 @@ export class ApiService {
   }
 
   private setHeader(token: string) {
-    return {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      })
-    };
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
   }
 }

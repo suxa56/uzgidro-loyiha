@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {AppService} from "@services/app.service";
-import {ProjectsDto, ProjectsResponse, SupervisorProjectsDto, SupervisorProjectsResponse} from "@/store/state";
+import {ProjectsDto, ProjectsResponse, Role, SupervisorProjectsDto, SupervisorProjectsResponse} from "@/store/state";
 
 @Component({
   selector: 'app-projects',
@@ -13,13 +13,15 @@ export class ProjectsComponent implements OnInit {
   supervisorProjects: SupervisorProjectsDto[]
   role: string
 
+  protected readonly Role = Role;
+
   constructor(private router: Router, private appService: AppService) {
   }
 
   ngOnInit() {
     this.role = this.appService.role
 
-    if (this.role === 'supervisor') {
+    if (this.role === Role.SUPERVISOR) {
       this.appService.getSupervisorProjects().subscribe({
         next: (response: SupervisorProjectsResponse[]) => {
           this.supervisorProjects = response.map(project => {

@@ -5,6 +5,18 @@ export interface AppState {
   ui: UiState
 }
 
+export enum Role {
+  SUPERVISOR = 'supervisor',
+  DESIGNER = 'designer',
+  BUILDER = 'builder',
+  PTO = 'pto',
+  UZG = 'uzg',
+  DIRECTOR = 'director',
+  CHIEF_DIRECTOR = 'chiefDirector',
+  CHIEF_SUPERVISOR = 'chiefSupervisor',
+  TEX_SUPERVISOR = 'tex_supervisor'
+}
+
 export interface AuthResponse {
   access: string
   refresh: string

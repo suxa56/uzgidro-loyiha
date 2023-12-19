@@ -15,6 +15,9 @@ const GET_REJECTED_PROJECTS = 'designer/reject-file/'
 const GET_SUPERVISOR_PROJECT_FILES = 'designer/control-project-file-all/'
 const GET_SUPERVISOR_PROJECTS = 'designer/control-allfiles/'
 const GET_SUPERVISOR_PROJECT = 'designer/control-file-detail/'
+const GET_SUPERVISOR_ACCEPTED_PROJECT = 'designer/control-accept/'
+const GET_SUPERVISOR_REJECTED_PROJECT = 'designer/control-reject/'
+const GET_SUPERVISOR_RESULT_PROJECT = 'designer/control-result/'
 const GET_SECTION = 'section_name/'
 const PATCH_ACCEPT_REJECT_PROJECT = 'designer/control-accept-reject/'
 
@@ -83,6 +86,21 @@ export class ApiService {
   getSupervisorProjects(token: string) {
     const options = this.setHeader(token)
     return this.http.get(SITE + GET_SUPERVISOR_PROJECTS, {headers: options})
+  }
+
+  getSupervisorAcceptedProjects(token: string) {
+    const options = this.setHeader(token)
+    return this.http.get(SITE + GET_SUPERVISOR_ACCEPTED_PROJECT, {headers: options})
+  }
+
+  getSupervisorRejectedProjects(token: string) {
+    const options = this.setHeader(token)
+    return this.http.get(SITE + GET_SUPERVISOR_REJECTED_PROJECT, {headers: options})
+  }
+
+  getSupervisorResultProjects(token: string) {
+    const options = this.setHeader(token)
+    return this.http.get(SITE + GET_SUPERVISOR_RESULT_PROJECT, {headers: options})
   }
 
   getSupervisorProjectById(projectId: number, token: string) {

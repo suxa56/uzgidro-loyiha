@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {ApiService} from "@services/api.service";
 import {CookieOptions, CookieService} from "ngx-cookie-service";
-import {AuthResponse} from "@/store/state";
+import {AuthResponse, Role} from "@/store/state";
 import * as jwtDecode from 'jwt-decode';
 import {catchError} from "rxjs";
 import FormData from "form-data";
@@ -155,6 +155,35 @@ export class AppService {
     )
   }
 
+  getSupervisorAcceptedProjects() {
+    return this.apiService.getSupervisorAcceptedProjects(this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
+  getSupervisorRejectedProjects() {
+    return this.apiService.getSupervisorRejectedProjects(this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
+  getSupervisorResultProjects() {
+    return this.apiService.getSupervisorResultProjects(this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
+
+
   getSupervisorProjectById(projectId: number) {
     return this.apiService.getSupervisorProjectById(projectId, this.token).pipe(
       catchError((error) => {
@@ -252,33 +281,33 @@ export class AppService {
   }
 
   private setRole(response: AuthResponse) {
-    let role: string
+    let role: Role
     if (response.is_builder) {
-      role = 'builder'
+      role = Role.BUILDER
     }
     if (response.is_pto) {
-      role = 'pto'
+      role = Role.PTO
     }
     if (response.is_uzg) {
-      role = 'uzg'
+      role = Role.UZG
     }
     if (response.is_director) {
-      role = 'director'
+      role = Role.DIRECTOR
     }
     if (response.is_designer) {
-      role = 'designer'
+      role = Role.DESIGNER
     }
     if (response.is_supervisor) {
-      role = 'supervisor'
+      role = Role.SUPERVISOR
     }
     if (response.is_chief_director) {
-      role = 'chiefDirector'
+      role = Role.CHIEF_DIRECTOR
     }
     if (response.is_chief_supervisor) {
-      role = 'chiefSupervisor'
+      role = Role.CHIEF_SUPERVISOR
     }
     if (response.is_tex_supervisor) {
-      role = 'tex_supervisor'
+      role = Role.TEX_SUPERVISOR
     }
     return role
   }

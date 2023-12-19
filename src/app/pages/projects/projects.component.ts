@@ -41,13 +41,13 @@ export class ProjectsComponent implements OnInit {
     }
 
     if (this.router.url === '/rejected') {
-      this.appService.getApprovedProjects().subscribe({
+      this.appService.getRejectedProjects().subscribe({
         next: (response: ProjectsResponse[]) => {
           this.setProjects(response)
         }
       })
     } else if (this.router.url === '/approved') {
-      this.appService.getRejectedProjects().subscribe({
+      this.appService.getApprovedProjects().subscribe({
         next: (response: ProjectsResponse[]) => {
           this.setProjects(response)
         }
@@ -69,7 +69,7 @@ export class ProjectsComponent implements OnInit {
 
   private mapResponseToDto(project: ProjectsResponse) {
     const accepted = (!project.is_redirect_designer && !project.is_active_designer)
-      ? null : (!project.is_active_designer && project.is_redirect_designer)
+      ? null : !(!project.is_active_designer && project.is_redirect_designer)
     const dto: ProjectsDto = {
       graphicNumber: project.graphic_number,
       archiveNumber: project.arxiv_number,

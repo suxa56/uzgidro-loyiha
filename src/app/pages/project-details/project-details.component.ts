@@ -28,7 +28,7 @@ export class ProjectDetailsComponent implements OnInit{
           archiveNumber: project.arxiv_number ? project.arxiv_number : '',
           graphicNumber: project.graphic_number ? project.graphic_number : '',
           workingProjectName: project.working_project_name ? project.working_project_name : '',
-          fileCode: project.project_files.file_code ? project.project_files.file_code : '',
+          fileCode: project.project_files && project.project_files.file_code ? project.project_files.file_code : '',
           username: project.user.username ? project.user.username : '',
           sectionName: project.user.section_name ? project.user.section_name : '',
           subject: project.subject ? project.subject : '',

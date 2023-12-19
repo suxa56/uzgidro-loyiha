@@ -85,7 +85,7 @@ export class ApiService {
 
   getSupervisorProjects(token: string) {
     const options = this.setHeader(token)
-    return this.http.get(SITE + GET_SUPERVISOR_PROJECTS, {headers: options})
+    return this.http.get(SITE + GET_SUPERVISOR_RESULT_PROJECT, {headers: options})
   }
 
   getSupervisorAcceptedProjects(token: string) {

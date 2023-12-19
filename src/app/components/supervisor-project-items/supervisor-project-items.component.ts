@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {ProjectsDto, SupervisorProjectsDto, SupervisorProjectsResponse} from "@/store/state";
+import {SupervisorProjectsDto} from "@/store/state";
 
 @Component({
   selector: 'app-supervisor-project-items',

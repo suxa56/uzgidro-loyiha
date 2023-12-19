@@ -60,8 +60,8 @@ export interface ProjectFilesResponse {
   created_add: string
   file_code: string
   updated_at: string
-  user: {id: number, username: string, section_name: string}
-  categories: {id: number, name: string}
+  user: { id: number, username: string, section_name: string }
+  categories: { id: number, name: string }
 }
 
 export interface ProjectsResponse {
@@ -81,12 +81,14 @@ export interface ProjectsResponse {
 
 export interface SupervisorProjectsResponse {
   id: number
-  user: {id: number, username: string, section_name: string}
-  project_files: {id: number, file_code: string}
+  user: { id: number, username: string, section_name: string }
+  project_files: { id: number, file_code: string }
   arxiv_number: string
   graphic_number: string
   working_project_name: string
   created_add: string
+  is_redirect_designer: boolean
+  is_active_designer: boolean
 }
 
 export interface SupervisorProjectsDto {
@@ -98,6 +100,7 @@ export interface SupervisorProjectsDto {
   graphicNumber: string
   workingProjectName: string
   createdAt: string
+  isAccepted?: boolean
 }
 
 export interface ProjectsDto {
@@ -112,12 +115,12 @@ export interface ProjectDetailResponse {
   message: string
   data: {
     id: number
-    user: {id: number, username: string, section_name: string}
+    user: { id: number, username: string, section_name: string }
     file_autocad: string
     file_pdf: string
     simeta_pdf: string
     simeta_autocad: string
-    project_files: {id: number, file_code: string}
+    project_files: { id: number, file_code: string }
     arxiv_number: string
     graphic_number: string
     created_add: string
@@ -137,7 +140,7 @@ export interface ProjectDetailDto {
   subject: string
   projectPdf: string
   projectAutocad: string
-  estimatePdf:string
-  estimateExcel:string
+  estimatePdf: string
+  estimateExcel: string
   createdAt: string
 }

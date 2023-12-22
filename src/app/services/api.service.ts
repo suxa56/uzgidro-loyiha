@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import FormData from "form-data";
+import {id} from "postcss-selector-parser";
 
 const SITE = 'https://4-sqd.uz/api/'
 const LOGIN = 'login/'
@@ -9,6 +10,7 @@ const CATEGORIES = 'designer/categories/'
 const CREATE_PROJECT_FILES = 'designer/project-file-create/'
 const GET_PROJECT_FILE_LIST = 'designer/project-file-list/'
 const CREATE_PROJECT = 'designer/all-files-create/'
+const PATCH_PROJECT = 'designer/patch-file/'
 const GET_ALL_PROJECTS = 'designer/all-files/'
 const GET_APPROVED_PROJECTS = 'designer/allowed-file/'
 const GET_REJECTED_PROJECTS = 'designer/reject-file/'
@@ -131,6 +133,11 @@ export class ApiService {
     const params = new HttpParams().append('reject', 'reject')
     const options = {headers: headers, params: params}
     return this.http.patch(SITE + PATCH_ACCEPT_REJECT_PROJECT + projectId + '/', {}, options)
+  }
+
+  patchProject(projectId: number, formData: FormData, token: string) {
+    const options = this.setFileHeader(token)
+    return this.http.patch(SITE + PATCH_PROJECT + projectId + '/', formData, options)
   }
 
   private setFileHeader(token: string) {

@@ -248,6 +248,21 @@ export class AppService {
     )
   }
 
+  changeProject(id: number, subject: string, files: Record<string, File>) {
+    const formData = new FormData()
+    formData.append('subject', subject)
+    formData.append('file_pdf', files['projectPdf'])
+    formData.append('file_autocad', files['projectAutocad'])
+    formData.append('simeta_pdf', files['estimatePdf'])
+    formData.append('simeta_autocad', files['estimateExcel'])
+    return this.apiService.patchProject(id, formData, this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
   isTokenValid() {
     if (this.cookie.check('jwt') && jwtDecode.jwtDecode(this.cookie.get('jwt')).exp * 1000 > new Date().getTime()) {
       return true

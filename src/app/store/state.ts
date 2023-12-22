@@ -107,6 +107,7 @@ export interface SupervisorProjectsDto {
 }
 
 export interface ProjectsDto {
+  id: number
   archiveNumber: string
   graphicNumber: string
   workingProjectName: string

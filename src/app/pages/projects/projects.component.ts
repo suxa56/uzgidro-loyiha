@@ -20,9 +20,17 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit() {
     this.role = this.appService.role
+    this.getData()
+  }
 
+  updateTable(update: boolean) {
+    if (update) {
+      this.getData()
+    }
+  }
+
+  private getData() {
     if (this.role === Role.SUPERVISOR) {
-
       if (this.router.url === '/rejected') {
         this.appService.getSupervisorRejectedProjects().subscribe({
           next: (response: SupervisorProjectsResponse[]) => {
@@ -42,26 +50,26 @@ export class ProjectsComponent implements OnInit {
           }
         })
       }
-    }
-
-    if (this.router.url === '/rejected') {
-      this.appService.getRejectedProjects().subscribe({
-        next: (response: ProjectsResponse[]) => {
-          this.setProjects(response)
-        }
-      })
-    } else if (this.router.url === '/approved') {
-      this.appService.getApprovedProjects().subscribe({
-        next: (response: ProjectsResponse[]) => {
-          this.setProjects(response)
-        }
-      })
-    } else {
-      this.appService.getProjects().subscribe({
-        next: (response: ProjectsResponse[]) => {
-          this.setProjects(response)
-        }
-      })
+    } else if (this.role === Role.DESIGNER) {
+      if (this.router.url === '/rejected') {
+        this.appService.getRejectedProjects().subscribe({
+          next: (response: ProjectsResponse[]) => {
+            this.setProjects(response)
+          }
+        })
+      } else if (this.router.url === '/approved') {
+        this.appService.getApprovedProjects().subscribe({
+          next: (response: ProjectsResponse[]) => {
+            this.setProjects(response)
+          }
+        })
+      } else {
+        this.appService.getProjects().subscribe({
+          next: (response: ProjectsResponse[]) => {
+            this.setProjects(response)
+          }
+        })
+      }
     }
   }
 
@@ -81,6 +89,7 @@ export class ProjectsComponent implements OnInit {
     const accepted = (!project.is_redirect_designer && !project.is_active_designer)
       ? null : (project.is_active_designer && !project.is_redirect_designer)
     const dto: ProjectsDto = {
+      id: project.id,
       graphicNumber: project.graphic_number,
       archiveNumber: project.arxiv_number,
       workingProjectName: project.working_project_name,

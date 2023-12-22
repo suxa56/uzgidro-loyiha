@@ -7,8 +7,6 @@
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <!--          <li class="breadcrumb-item"><a href="#">Главная</a></li>-->
-          <!--          <li class="breadcrumb-item active">Проекты</li>-->
         </ol>
       </div>
     </div>
@@ -21,12 +19,11 @@
   <!-- Default box -->
   <div class="container-fluid">
     <div class="card">
-      <!--      <div class="card-header">-->
-      <!--        <h3 class="card-title">Loyihalar</h3>-->
-      <!--      </div>-->
       <div class="card-body">
-        <app-project-item *ngIf="role === Role.DESIGNER" [projects]="projects"></app-project-item>
-        <app-supervisor-project-items *ngIf="role === Role.SUPERVISOR" [projects]="supervisorProjects"></app-supervisor-project-items>
+        <app-project-item *ngIf="role === Role.DESIGNER" [projects]="projects"
+                          (projectUpdateEvent)="updateTable($event)"></app-project-item>
+        <app-supervisor-project-items *ngIf="role === Role.SUPERVISOR"
+                                      [projects]="supervisorProjects"></app-supervisor-project-items>
       </div>
       <!-- /.card-body -->
     </div>

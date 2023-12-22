@@ -12,6 +12,8 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css');
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700');
 
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 @import '~admin-lte/plugins/fontawesome-free/css/all.min.css';
 @import '~admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css';
 @import '~admin-lte/dist/css/adminlte.min.css';
@@ -47,3 +49,6 @@ body {
 .nav-sidebar .menu-open > .nav-link svg.right {
     transform: none;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

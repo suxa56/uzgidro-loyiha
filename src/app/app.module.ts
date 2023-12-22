@@ -44,6 +44,9 @@ import { DocsItemComponent } from '@components/docs-item/docs-item.component';
 import { SupervisorProjectItemsComponent } from '@components/supervisor-project-items/supervisor-project-items.component';
 import { ProjectDetailsComponent } from '@pages/project-details/project-details.component';
 
+import {MatDialogModule} from '@angular/material/dialog';
+import { FilesModalComponent } from './components/files-modal/files-modal.component';
+
 registerLocaleData(localeEn, 'en-EN');
 
 @NgModule({
@@ -77,7 +80,8 @@ registerLocaleData(localeEn, 'en-EN');
     DocsComponent,
     DocsItemComponent,
     SupervisorProjectItemsComponent,
-    ProjectDetailsComponent
+    ProjectDetailsComponent,
+    FilesModalComponent
   ],
   imports: [
     ProfabricComponentsModule,
@@ -93,7 +97,8 @@ registerLocaleData(localeEn, 'en-EN');
       timeOut: 3000,
       positionClass: 'toast-top-right',
       preventDuplicates: true
-    })
+    }),
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

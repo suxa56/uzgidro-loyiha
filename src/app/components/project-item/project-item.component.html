@@ -10,22 +10,23 @@
     <th>Smeta PDF</th>
     <th>Smeta Excel</th>
     <th>Kiritilgan vaqti</th>
-    <th>Ozgartirilga vaqti</th>
+    <th>Ozgartirilgan vaqti</th>
     <th>Status</th>
+    <th></th>
   </tr>
   </thead>
   <tbody *ngFor="let project of projects; index as i">
   <tr>
-    <td>{{i+1}}</td>
-    <td>{{project.graphicNumber}}</td>
-    <td>{{project.archiveNumber}}</td>
-    <td>{{project.workingProjectName}}</td>
+    <td>{{ i + 1 }}</td>
+    <td>{{ project.graphicNumber }}</td>
+    <td>{{ project.archiveNumber }}</td>
+    <td>{{ project.workingProjectName }}</td>
     <td><i class="fa-solid fa-file-pdf"></i></td>
     <td><i class="fa-solid fa-file-invoice"></i></td>
     <td><i class="fa-solid fa-file-pdf"></i></td>
     <td><i class="fa-solid fa-file-excel"></i></td>
-    <td>{{project.createdAt | date:'HH:mm, dd-MM-yyyy'}}</td>
-    <td>{{project.updatedAt | date:'HH:mm, dd-MM-yyyy'}}</td>
+    <td>{{ project.createdAt | date:'HH:mm, dd-MM-yyyy' }}</td>
+    <td>{{ project.updatedAt | date:'HH:mm, dd-MM-yyyy' }}</td>
     <td [ngClass]="{
       'text-red-600': !project.isAccepted ,
       'text-slate-600': project.isAccepted === null,
@@ -34,6 +35,12 @@
       <p *ngSwitchCase="null">Tekshirishda</p>
       <p *ngSwitchCase="true">Qabul qilingan</p>
       <p *ngSwitchCase="false">Rad etilgan</p>
+    </td>
+    <td>
+      <button *ngIf="project.isAccepted === false" (click)="changeFiles(project)"
+              class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 active:bg-blue-400">
+        O'zgartirish
+      </button>
     </td>
   </tr>
   </tbody>

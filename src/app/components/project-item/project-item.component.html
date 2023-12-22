@@ -9,7 +9,8 @@
     <th>Loyiha Autocad</th>
     <th>Smeta PDF</th>
     <th>Smeta Excel</th>
-    <th>Sana</th>
+    <th>Kiritilgan vaqti</th>
+    <th>Ozgartirilga vaqti</th>
     <th>Status</th>
   </tr>
   </thead>
@@ -23,7 +24,8 @@
     <td><i class="fa-solid fa-file-invoice"></i></td>
     <td><i class="fa-solid fa-file-pdf"></i></td>
     <td><i class="fa-solid fa-file-excel"></i></td>
-    <td>{{project.createdAt | date:'dd-MM-yyyy'}}</td>
+    <td>{{project.createdAt | date:'HH:mm, dd-MM-yyyy'}}</td>
+    <td>{{project.updatedAt | date:'HH:mm, dd-MM-yyyy'}}</td>
     <td [ngClass]="{
       'text-red-600': !project.isAccepted ,
       'text-slate-600': project.isAccepted === null,

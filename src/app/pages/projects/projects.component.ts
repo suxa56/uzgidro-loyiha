@@ -85,6 +85,7 @@ export class ProjectsComponent implements OnInit {
       archiveNumber: project.arxiv_number,
       workingProjectName: project.working_project_name,
       createdAt: new Date(project.created_add),
+      updatedAt: new Date(project.updated_at),
       isAccepted: accepted
     }
     return dto
@@ -107,7 +108,8 @@ export class ProjectsComponent implements OnInit {
       username: project.user.username,
       sectionName: project.user.section_name,
       graphicNumber: project.graphic_number,
-      createdAt: project.created_add,
+      createdAt: new Date(project.created_add),
+      updatedAt: new Date(project.updated_at),
       isAccepted: accepted
     }
     return dto

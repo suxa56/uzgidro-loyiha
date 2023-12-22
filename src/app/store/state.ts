@@ -74,6 +74,7 @@ export interface ProjectsResponse {
   simeta_pdf: string
   simeta_autocad: string
   created_add: string
+  updated_at?: string
   is_redirect_designer: boolean
   is_active_designer: boolean
   project_files: ProjectFilesResponse
@@ -87,6 +88,7 @@ export interface SupervisorProjectsResponse {
   graphic_number: string
   working_project_name: string
   created_add: string
+  updated_at?: string
   is_redirect_designer: boolean
   is_active_designer: boolean
 }
@@ -99,7 +101,8 @@ export interface SupervisorProjectsDto {
   archiveNumber: string
   graphicNumber: string
   workingProjectName: string
-  createdAt: string
+  createdAt: Date
+  updatedAt?: Date
   isAccepted?: boolean
 }
 
@@ -108,6 +111,7 @@ export interface ProjectsDto {
   graphicNumber: string
   workingProjectName: string
   createdAt: Date
+  updatedAt?: Date
   isAccepted?: boolean
 }
 

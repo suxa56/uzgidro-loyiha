@@ -8,7 +8,8 @@
     <th>Grafik raqami</th>
     <th>Arxiv raqami</th>
     <th>Ishchi loyiha nomi</th>
-    <th>Sana</th>
+    <th>Kiritilgan vaqit</th>
+    <th>Ozgartiligan vaqit</th>
     <th>Status</th>
     <th>Batafsil</th>
   </tr>
@@ -22,7 +23,8 @@
     <td>{{project.graphicNumber}}</td>
     <td>{{project.archiveNumber}}</td>
     <td>{{project.workingProjectName}}</td>
-    <td>{{project.createdAt | date:'dd-MM-yyyy'}}</td>
+    <td>{{project.createdAt | date:'HH:mm, dd-MM-yyyy'}}</td>
+    <td>{{project.updatedAt | date:'HH:mm, dd-MM-yyyy'}}</td>
     <td [ngClass]="{
       'text-slate-600': project.isAccepted === null,
       'text-red-600': !project.isAccepted ,

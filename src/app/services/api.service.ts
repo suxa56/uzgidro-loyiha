@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import FormData from "form-data";
-import {id} from "postcss-selector-parser";
 
 const SITE = 'https://4-sqd.uz/api/'
 const LOGIN = 'login/'
@@ -22,6 +21,8 @@ const GET_SUPERVISOR_REJECTED_PROJECT = 'designer/control-reject/'
 const GET_SUPERVISOR_RESULT_PROJECT = 'designer/control-result/'
 const GET_SECTION = 'section_name/'
 const PATCH_ACCEPT_REJECT_PROJECT = 'designer/control-accept-reject/'
+
+const DOWNLOAD_FILES = 'designer/control-download/'
 
 @Injectable({
   providedIn: 'root'
@@ -118,6 +119,15 @@ export class ApiService {
   getRejectedProjects(token: string) {
     const options = this.setHeader(token)
     return this.http.get(SITE + GET_REJECTED_PROJECTS, {headers: options})
+  }
+
+  downloadFiles(type: string, projectId: number, token: string) {
+    const params = new HttpParams().append('file-type', type)
+    return this.http.get(SITE + DOWNLOAD_FILES + projectId + '/', {
+      responseType: 'blob',
+      params: params,
+      headers: {'Authorization': `Bearer ${token}`}
+    })
   }
 
 

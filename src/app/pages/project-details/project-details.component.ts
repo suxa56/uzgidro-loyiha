@@ -8,9 +8,9 @@ import {ProjectDetailDto, ProjectDetailResponse} from "@/store/state";
   templateUrl: './project-details.component.html',
   styleUrls: ['./project-details.component.scss']
 })
-export class ProjectDetailsComponent implements OnInit{
+export class ProjectDetailsComponent implements OnInit {
 
-  projectId:number
+  projectId: number
   project: ProjectDetailDto
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private appService: AppService) {
@@ -32,12 +32,28 @@ export class ProjectDetailsComponent implements OnInit{
           username: project.user.username ? project.user.username : '',
           sectionName: project.user.section_name ? project.user.section_name : '',
           subject: project.subject ? project.subject : '',
-          projectPdf: project.file_pdf ? project.file_pdf : '',
-          projectAutocad: project.file_autocad ? project.file_autocad : '',
-          estimateExcel: project.simeta_autocad ? project.simeta_autocad : '',
-          estimatePdf: project.simeta_pdf ? project.simeta_pdf : '',
+          projectPdf: project.file_pdf,
+          projectAutocad: project.file_autocad,
+          estimateExcel: project.simeta_autocad,
+          estimatePdf: project.simeta_pdf,
           createdAt: project.created_add ? project.created_add : ''
         }
+      }
+    })
+  }
+
+  download(type: string) {
+    this.appService.downloadFiles(type, this.projectId).subscribe({
+      next: value => {
+        const blob = new Blob([value], {type: value.type}); // Создание Blob из полученных данных
+        const fileURL = URL.createObjectURL(blob);
+        const extension = this.getFileExtension(value.type)
+
+        const link = document.createElement('a');
+        link.href = fileURL;
+        link.download = `${this.project.graphicNumber}-${type}.${extension}`;
+        link.click();
+        URL.revokeObjectURL(fileURL);
       }
     })
   }
@@ -49,11 +65,38 @@ export class ProjectDetailsComponent implements OnInit{
       }
     })
   }
+
   rejectProject() {
     this.appService.rejectProject(this.projectId).subscribe({
       next: () => {
         this.router.navigate(['/projects'])
       }
     })
+  }
+
+  private getFileExtension(type: string) {
+    switch (type) {
+      case 'application/vnd.ms-excel': {
+        return 'xls'
+      }
+      case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': {
+        return 'xlsx'
+      }
+      case 'application/msword': {
+        return 'doc'
+      }
+      case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document': {
+        return 'docx'
+      }
+      case 'application/pdf': {
+        return 'pdf'
+      }
+      case 'application/octet-stream': {
+        return 'dwg'
+      }
+      default: {
+        return "pdf"
+      }
+    }
   }
 }

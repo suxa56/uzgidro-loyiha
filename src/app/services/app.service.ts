@@ -15,11 +15,13 @@ export class AppService {
 
   private _token = this.cookie.get('jwt')
   private _role = this.cookie.get('role')
+
   get token(): string {
     if (this.isTokenValid()) {
       return this._token
     }
   }
+
   get role(): string {
     return this._role;
   }
@@ -27,6 +29,7 @@ export class AppService {
   set token(jwt: string) {
     this._token = jwt;
   }
+
   set role(value: string) {
     this._role = value;
   }
@@ -182,8 +185,6 @@ export class AppService {
     )
   }
 
-
-
   getSupervisorProjectById(projectId: number) {
     return this.apiService.getSupervisorProjectById(projectId, this.token).pipe(
       catchError((error) => {
@@ -204,6 +205,15 @@ export class AppService {
 
   getRejectedProjects() {
     return this.apiService.getRejectedProjects(this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
+  downloadFiles(type: string, projectId: number) {
+    return this.apiService.downloadFiles(type, projectId, this.token).pipe(
       catchError((error) => {
         this.toastr.error(error.message, 'Ошибка при отправке данных')
         return [];
@@ -286,7 +296,7 @@ export class AppService {
         domain: undefined,
         expires: token.exp
       }
-      this.cookie.set('role', this.setRole(response), new Date(token.exp*1000))
+      this.cookie.set('role', this.setRole(response), new Date(token.exp * 1000))
       this.cookie.set('jwt', response.access, options)
       this.token = this.cookie.get('jwt')
       this.role = this.cookie.get('role')

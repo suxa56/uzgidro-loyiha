@@ -13,12 +13,12 @@
         <div>
           PDF:
           <input formControlName="projectPdf" (change)="documentOnChange($event, 'projectPdf')" class="file" type="file"
-                 accept=".pdf">
+                 accept="application/pdf">
         </div>
         <div>
           Autocad:
           <input formControlName="projectAutocad" (change)="documentOnChange($event, 'projectAutocad')" class="file"
-                 type="file" accept=".dwg, .dxf">
+                 type="file" accept=".dwg">
         </div>
       </div>
     </div>
@@ -29,12 +29,13 @@
           PDF:
           <input formControlName="estimatePdf" (change)="documentOnChange($event, 'estimatePdf')" class="file"
                  type="file"
-                 accept=".pdf">
+                 accept="application/pdf">
         </div>
         <div>
           Excel:
           <input formControlName="estimateExcel" (change)="documentOnChange($event, 'estimateExcel')" class="file"
-                 type="file" accept="application/vnd.ms-excel, .png, .jpg, .pdf">
+                 type="file"
+                 accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
         </div>
       </div>
     </div>

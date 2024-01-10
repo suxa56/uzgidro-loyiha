@@ -3,6 +3,7 @@ import {AppService} from "@services/app.service";
 import {ToastrService} from "ngx-toastr";
 import {ProjectFilesResponse} from "@/store/state";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-project',
@@ -17,7 +18,7 @@ export class CreateProjectComponent implements OnInit{
   loading = false
   files: Record<string, File> = {}
 
-  constructor(private appService: AppService, private toastr: ToastrService) {
+  constructor(private appService: AppService, private toastr: ToastrService, private router: Router) {
   }
   ngOnInit() {
     this.getProjectFiles()
@@ -28,11 +29,11 @@ export class CreateProjectComponent implements OnInit{
     if (this.fileForm.valid) {
       this.loading = true
       this.appService.submitProject(this.projectFileId, this.fileForm.value, this.files).subscribe({
-        next: response => {
-          // console.log(response)
+        next: () => {
           this.toastr.success('', 'Loyiha jonatildi')
+          this.router.navigate(['/projects'])
         },
-        error: _ => {
+        error: () => {
           this.toastr.error('', 'Loyiha jonatilmadi')
         },
         complete: () => {

@@ -17,7 +17,8 @@ export class ProjectItemComponent {
 
   changeFiles(project: ProjectsDto) {
     const dialog = this.dialog.open(FilesModalComponent, {
-      data: project
+      data: project,
+      width: '80%'
     })
     dialog.afterClosed().subscribe(() => {
       this.projectUpdateEvent.emit(true)

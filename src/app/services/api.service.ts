@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import FormData from "form-data";
-import {string} from "postcss-selector-parser";
 
 const SITE = 'https://4-sqd.uz/api/'
 const LOGIN = 'login/'
@@ -21,6 +20,7 @@ const GET_SUPERVISOR_ACCEPTED_PROJECT = 'designer/control-accept/'
 const GET_SUPERVISOR_REJECTED_PROJECT = 'designer/control-reject/'
 const GET_SUPERVISOR_RESULT_PROJECT = 'designer/control-result/'
 const GET_SECTION = 'section_name/'
+const GET_REJECT_COMMENT = 'designer/reject-file/'
 const PATCH_ACCEPT_REJECT_PROJECT = 'designer/control-accept-reject/'
 
 const DOWNLOAD_FILES = 'designer/control-download/'
@@ -85,6 +85,11 @@ export class ApiService {
   getProjects(token: string) {
     const options = this.setHeader(token)
     return this.http.get(SITE + GET_ALL_PROJECTS, {headers: options})
+  }
+
+  getRejectedComment(projectId: number, token: string) {
+    const options = this.setHeader(token)
+    return this.http.get(SITE + GET_REJECT_COMMENT + projectId + '/', {headers: options})
   }
 
   getSupervisorProjects(token: string) {

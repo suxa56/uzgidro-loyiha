@@ -13,6 +13,8 @@ import {AppService} from "@services/app.service";
 export class FilesModalComponent implements OnInit {
   files: Record<string, File> = {}
   fileForm: FormGroup
+  comment: string
+  rejectedBy: string
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ProjectsDto,
               private appService: AppService,
@@ -21,6 +23,13 @@ export class FilesModalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.appService.getRejectedComment(this.data.id).subscribe({
+      next: value => {
+        this.comment = value.data.comment
+        this.rejectedBy = value.data.user.username
+      }
+    })
+
     this.fileForm = new FormGroup({
       subject: new FormControl(null, Validators.required),
       projectPdf: new FormControl(null, Validators.required),

@@ -2,6 +2,13 @@
 
 <form [formGroup]="fileForm" (ngSubmit)="submitProject()">
   <mat-dialog-content>
+
+    <div class="flex flex-col p-2 border border-slate-700 rounded">
+      <h3 *ngIf="rejectedBy" class="text-lg font-medium">{{rejectedBy}}dan rad etilgan izoh:</h3>
+      <hr>
+      <p *ngIf="comment" class="text-lg break-words">{{comment}}</p>
+    </div>
+
     <div class="flex flex-col w-full font-medium text-lg">
       Izoh:
       <textarea formControlName="subject" class="outline-blue-500 border border-blue-400 px-2 py-1"></textarea>

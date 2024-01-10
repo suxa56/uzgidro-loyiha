@@ -240,6 +240,15 @@ export class AppService {
     )
   }
 
+  getRejectedComment(projectId: number) {
+    return this.apiService.getRejectedComment(projectId, this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
   acceptProject(projectId: number, comment: string) {
     return this.apiService.acceptProject(projectId, comment, this.token).pipe(
       catchError((error) => {

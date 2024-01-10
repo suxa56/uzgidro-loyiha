@@ -1,0 +1,19 @@
+<h2 mat-dialog-title *ngIf="!data.approve">Loyihani rad etish</h2>
+<h2 mat-dialog-title *ngIf="data.approve">Loyihani qabul qilish</h2>
+
+<form>
+  <mat-dialog-content>
+    <div class="flex flex-col w-full font-medium text-lg">
+      Izoh:
+      <textarea [(ngModel)]="data.comment" name="comment" class="outline-blue-500 border border-blue-400 px-2 py-1"></textarea>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button [mat-dialog-close]="data.comment" type="submit" class="bg-blue-500 text-lg text-white px-4 py-2 rounded hover:bg-blue-600 active:bg-blue-400  mr-2">
+      Jo'natish
+    </button>
+    <button (click)="close()" class="bg-gray-500 text-lg text-white px-4 py-2 rounded hover:bg-gray-600 active:bg-gray-400">
+      Bekor qilish
+    </button>
+  </mat-dialog-actions>
+</form>

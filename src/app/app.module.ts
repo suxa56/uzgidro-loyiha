@@ -46,6 +46,7 @@ import { ProjectDetailsComponent } from '@pages/project-details/project-details.
 
 import {MatDialogModule} from '@angular/material/dialog';
 import { FilesModalComponent } from './components/files-modal/files-modal.component';
+import { CommentModalComponent } from './components/comment-modal/comment-modal.component';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -81,25 +82,26 @@ registerLocaleData(localeEn, 'en-EN');
     DocsItemComponent,
     SupervisorProjectItemsComponent,
     ProjectDetailsComponent,
-    FilesModalComponent
+    FilesModalComponent,
+    CommentModalComponent
   ],
-  imports: [
-    ProfabricComponentsModule,
-    CommonModule,
-    BrowserModule,
-    StoreModule.forRoot({auth: authReducer, ui: uiReducer}),
-    HttpClientModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot({
-      timeOut: 3000,
-      positionClass: 'toast-top-right',
-      preventDuplicates: true
-    }),
-    MatDialogModule
-  ],
+    imports: [
+        ProfabricComponentsModule,
+        CommonModule,
+        BrowserModule,
+        StoreModule.forRoot({auth: authReducer, ui: uiReducer}),
+        HttpClientModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+            preventDuplicates: true
+        }),
+        MatDialogModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

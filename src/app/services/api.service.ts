@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import FormData from "form-data";
+import {string} from "postcss-selector-parser";
 
 const SITE = 'https://4-sqd.uz/api/'
 const LOGIN = 'login/'
@@ -131,18 +132,18 @@ export class ApiService {
   }
 
 
-  acceptProject(projectId: number, token: string) {
+  acceptProject(projectId: number, comment: string, token: string) {
     const headers = this.setHeader(token)
     const params = new HttpParams().append('accept', 'accept')
     const options = {headers: headers, params: params}
-    return this.http.patch(SITE + PATCH_ACCEPT_REJECT_PROJECT + projectId + '/', {}, options)
+    return this.http.patch(SITE + PATCH_ACCEPT_REJECT_PROJECT + projectId + '/', {comment: comment}, options)
   }
 
-  rejectProject(projectId: number, token: string) {
+  rejectProject(projectId: number, comment: string, token: string) {
     const headers = this.setHeader(token)
     const params = new HttpParams().append('reject', 'reject')
     const options = {headers: headers, params: params}
-    return this.http.patch(SITE + PATCH_ACCEPT_REJECT_PROJECT + projectId + '/', {}, options)
+    return this.http.patch(SITE + PATCH_ACCEPT_REJECT_PROJECT + projectId + '/', {comment: comment}, options)
   }
 
   patchProject(projectId: number, formData: FormData, token: string) {

@@ -1,7 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AppService} from "@services/app.service";
-import {ProjectDetailDto, ProjectDetailResponse} from "@/store/state";
+import {ProjectDetailDto, ProjectDetailResponse, ProjectsDto} from "@/store/state";
+import {MatDialog} from "@angular/material/dialog";
+import {FilesModalComponent} from "@components/files-modal/files-modal.component";
+import {ToastrService} from "ngx-toastr";
+import {CommentModalComponent} from "@components/comment-modal/comment-modal.component";
 
 @Component({
   selector: 'app-project-details',
@@ -12,8 +16,9 @@ export class ProjectDetailsComponent implements OnInit {
 
   projectId: number
   project: ProjectDetailDto
+  comment: string
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private appService: AppService) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private appService: AppService, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -42,6 +47,22 @@ export class ProjectDetailsComponent implements OnInit {
     })
   }
 
+  openDialog(approve: boolean) {
+    const dialog = this.dialog.open(CommentModalComponent, {
+      width: '50%',
+      data: {id: this.projectId, comment: this.comment, approve: approve}
+    })
+    dialog.afterClosed().subscribe(result => {
+      if (result) {
+       if (approve) {
+         this.acceptProject(result)
+       } else {
+         this.rejectProject(result)
+       }
+      }
+    })
+  }
+
   download(type: string) {
     this.appService.downloadFiles(type, this.projectId).subscribe({
       next: value => {
@@ -58,16 +79,16 @@ export class ProjectDetailsComponent implements OnInit {
     })
   }
 
-  acceptProject() {
-    this.appService.acceptProject(this.projectId).subscribe({
+  private acceptProject(comment: string) {
+    this.appService.acceptProject(this.projectId, comment).subscribe({
       next: () => {
         this.router.navigate(['/projects'])
       }
     })
   }
 
-  rejectProject() {
-    this.appService.rejectProject(this.projectId).subscribe({
+  private rejectProject(comment: string) {
+    this.appService.rejectProject(this.projectId, comment).subscribe({
       next: () => {
         this.router.navigate(['/projects'])
       }
@@ -99,4 +120,6 @@ export class ProjectDetailsComponent implements OnInit {
       }
     }
   }
+
+  protected readonly open = open;
 }

@@ -240,8 +240,8 @@ export class AppService {
     )
   }
 
-  acceptProject(projectId: number) {
-    return this.apiService.acceptProject(projectId, this.token).pipe(
+  acceptProject(projectId: number, comment: string) {
+    return this.apiService.acceptProject(projectId, comment, this.token).pipe(
       catchError((error) => {
         this.toastr.error(error.message, 'Ошибка при отправке данных')
         return [];
@@ -249,8 +249,8 @@ export class AppService {
     )
   }
 
-  rejectProject(projectId: number) {
-    return this.apiService.rejectProject(projectId, this.token).pipe(
+  rejectProject(projectId: number, comment: string) {
+    return this.apiService.rejectProject(projectId, comment, this.token).pipe(
       catchError((error) => {
         this.toastr.error(error.message, 'Ошибка при отправке данных')
         return [];

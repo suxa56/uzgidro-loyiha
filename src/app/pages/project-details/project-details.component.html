@@ -71,7 +71,7 @@
           </tbody>
         </table>
 
-        <div class="flex w-max h-fit mt-5 space-x-2">
+        <div class="flex w-max h-fit mt-5 space-x-2 items-center">
           <p>Xulosa:</p>
           <p class="max-w-5xl break-words border rounded p-2">{{ project.subject }}</p>
         </div>
@@ -79,10 +79,10 @@
       <!-- /.card-body -->
       <div class="card-footer space-y-4">
         <div class="flex flex-row justify-end space-x-2 m-3">
-          <button (click)="rejectProject()"
+          <button (click)="openDialog(false)"
                   class="bg-red-500 hover:bg-red-700 text-white py-2 px-3 rounded disabled:bg-red-300">Rad etish
           </button>
-          <button (click)="acceptProject()"
+          <button (click)="openDialog(true)"
                   class="bg-green-500 hover:bg-green-700 text-white py-2 px-3 rounded disabled:bg-green-300">Qabul
             qilish
           </button>

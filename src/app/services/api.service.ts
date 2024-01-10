@@ -136,6 +136,12 @@ export class ApiService {
     })
   }
 
+  downloadDocs(projectId: number, token: string){
+    return this.http.get(SITE + DOWNLOAD_FILES + projectId + '/', {
+      responseType: 'blob',
+      headers: {'Authorization': `Bearer ${token}`}
+    })
+  }
 
   acceptProject(projectId: number, comment: string, token: string) {
     const headers = this.setHeader(token)

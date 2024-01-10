@@ -20,10 +20,23 @@
     <td>{{doc.user.section_name}}</td>
     <td>{{doc.categories.name}}</td>
     <td>{{doc.file_code}}</td>
-    <td><i class="fa-solid fa-file"></i></td>
-    <td><i class="fa-solid fa-file"></i></td>
-    <td><i class="fa-solid fa-file"></i></td>
-    <td><i class="fa-solid fa-file"></i></td>
+    <td>
+      <button (click)="download()" *ngIf="doc.decision_files"
+              class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded disabled:bg-blue-300"><i
+        class="fa-light fa-down-to-bracket w-5"></i></button>
+    </td>
+    <td>
+      <button (click)="download()" *ngIf="doc.calendar_files"
+              class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded disabled:bg-blue-300"><i
+        class="fa-light fa-down-to-bracket w-5"></i></button></td>
+    <td>
+      <button (click)="download()" *ngIf="doc.contract_files"
+              class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded disabled:bg-blue-300"><i
+        class="fa-light fa-down-to-bracket w-5"></i></button></td>
+    <td>
+      <button (click)="download()" *ngIf="doc.additional_files"
+              class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded disabled:bg-blue-300"><i
+        class="fa-light fa-down-to-bracket w-5"></i></button></td>
     <td>{{doc.created_add | date:'dd-MM-yyyy'}}</td>
   </tr>
   </tbody>

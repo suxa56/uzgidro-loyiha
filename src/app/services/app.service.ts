@@ -221,6 +221,15 @@ export class AppService {
     )
   }
 
+  downloadDocs(projectId: number) {
+    return this.apiService.downloadDocs(projectId, this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
   submitProject(projectFileId: number, {graphic, archive, worker, subject}, files: Record<string, File>) {
     const formData = new FormData()
     formData.append('project_files', projectFileId)

@@ -8,4 +8,8 @@ import {ProjectFilesResponse} from "@/store/state";
 })
 export class DocsItemComponent {
   @Input() docs: ProjectFilesResponse[] = null
+
+  download() {
+
+  }
 }

@@ -149,3 +149,22 @@ export interface ProjectDetailDto {
   estimateExcel: string
   createdAt: string
 }
+
+
+export interface ConclusionResponse {
+  id: number
+  user: {username: string}
+  comment: string | null
+  all_file: {arxiv_number:string, graphic_number: string, project_files: {file_code: string}}
+  created_add: string
+}
+
+export interface ConclusionDto {
+  id: number
+  user: string
+  archiveNumber: string
+  graphicNumber: string
+  fileCode: string
+  comment: string
+  createdAt: Date
+}

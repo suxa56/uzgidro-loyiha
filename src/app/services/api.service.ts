@@ -23,6 +23,8 @@ const GET_SECTION = 'section_name/'
 const GET_REJECT_COMMENT = 'designer/reject-file/'
 const PATCH_ACCEPT_REJECT_PROJECT = 'designer/control-accept-reject/'
 
+const GET_CONCLUSION = 'designer/summary-file/'
+
 const DOWNLOAD_FILES = 'designer/control-download/'
 const DOWNLOAD_DOCS = 'designer/project-download/'
 
@@ -87,6 +89,11 @@ export class ApiService {
   getProjects(token: string) {
     const options = this.setHeader(token)
     return this.http.get(SITE + GET_ALL_PROJECTS, {headers: options})
+  }
+
+  getConclusions(token: string) {
+    const options = this.setHeader(token)
+    return this.http.get(SITE + GET_CONCLUSION, {headers: options})
   }
 
   getRejectedComment(projectId: number, token: string) {

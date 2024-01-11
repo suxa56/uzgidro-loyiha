@@ -149,6 +149,15 @@ export class AppService {
     )
   }
 
+  getConclusions() {
+    return this.apiService.getConclusions(this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
   getSupervisorProjects() {
     return this.apiService.getSupervisorProjects(this.token).pipe(
       catchError((error) => {

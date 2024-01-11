@@ -1,7 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {AppService} from "@services/app.service";
-import {ProjectsDto, ProjectsResponse, Role, SupervisorProjectsDto, SupervisorProjectsResponse} from "@/store/state";
+import {
+  DirectorProjectsDto,
+  DirectorProjectsResponse,
+  ProjectsDto,
+  ProjectsResponse,
+  Role,
+  SupervisorProjectsDto,
+  SupervisorProjectsResponse
+} from "@/store/state";
 
 @Component({
   selector: 'app-projects',
@@ -11,6 +19,7 @@ import {ProjectsDto, ProjectsResponse, Role, SupervisorProjectsDto, SupervisorPr
 export class ProjectsComponent implements OnInit {
   projects: ProjectsDto[]
   supervisorProjects: SupervisorProjectsDto[]
+  directorProjects: DirectorProjectsDto[]
   role: string
 
   protected readonly Role = Role;
@@ -70,6 +79,26 @@ export class ProjectsComponent implements OnInit {
           }
         })
       }
+    } else if (this.role === Role.DIRECTOR) {
+      if (this.router.url === '/rejected') {
+        this.appService.getDirectorRejectedProjects().subscribe({
+          next: (response: DirectorProjectsResponse[]) => {
+            this.setDirectorProjects(response)
+          }
+        })
+      } else if (this.router.url === '/approved') {
+        this.appService.getDirectorAcceptedProjects().subscribe({
+          next: (response: DirectorProjectsResponse[]) => {
+            this.setDirectorProjects(response)
+          }
+        })
+      } else {
+        this.appService.getDirectorProjects().subscribe({
+          next: (response: DirectorProjectsResponse[]) => {
+            this.setDirectorProjects(response)
+          }
+        })
+      }
     }
   }
 
@@ -82,6 +111,12 @@ export class ProjectsComponent implements OnInit {
   private setSupervisorProjects(response: SupervisorProjectsResponse[], isAccepted?: boolean) {
     this.supervisorProjects = response.map(project => {
       return this.mapSupervisorResponseToDto(project, isAccepted)
+    })
+  }
+
+  private setDirectorProjects(response: DirectorProjectsResponse[]) {
+    this.directorProjects = response.map(value => {
+      return this.mapDirectorResponseToDto(value)
     })
   }
 
@@ -120,6 +155,23 @@ export class ProjectsComponent implements OnInit {
       createdAt: new Date(project.created_add),
       updatedAt: new Date(project.updated_at),
       isAccepted: accepted
+    }
+    return dto
+  }
+
+  private mapDirectorResponseToDto(project: DirectorProjectsResponse) {
+    const dto: DirectorProjectsDto = {
+      id: project.id,
+      archiveNumber: project.arxiv_number,
+      graphicNumber: project.graphic_number,
+      fileCode: project.project_files.file_code,
+      subject: project.subject,
+      username: project.project_files.user.username,
+      workingProjectName: project.working_project_name,
+      isAccepted: (!project.is_director_accept && !project.is_director_reject)
+        ? null : (project.is_director_accept && !project.is_director_reject),
+      createdAt: new Date(project.created_add),
+      updatedAt: new Date(project.updated_at)
     }
     return dto
   }

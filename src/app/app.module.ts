@@ -45,8 +45,9 @@ import { SupervisorProjectItemsComponent } from '@components/supervisor-project-
 import { ProjectDetailsComponent } from '@pages/project-details/project-details.component';
 
 import {MatDialogModule} from '@angular/material/dialog';
-import { FilesModalComponent } from './components/files-modal/files-modal.component';
-import { CommentModalComponent } from './components/comment-modal/comment-modal.component';
+import { FilesModalComponent } from '@components/files-modal/files-modal.component';
+import { CommentModalComponent } from '@components/comment-modal/comment-modal.component';
+import { DirectorProjectItemComponent } from '@components/director-project-item/director-project-item.component';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -83,7 +84,8 @@ registerLocaleData(localeEn, 'en-EN');
     SupervisorProjectItemsComponent,
     ProjectDetailsComponent,
     FilesModalComponent,
-    CommentModalComponent
+    CommentModalComponent,
+    DirectorProjectItemComponent
   ],
     imports: [
         ProfabricComponentsModule,

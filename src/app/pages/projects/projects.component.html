@@ -24,6 +24,8 @@
                           (projectUpdateEvent)="updateTable($event)"></app-project-item>
         <app-supervisor-project-items *ngIf="role === Role.SUPERVISOR"
                                       [projects]="supervisorProjects"></app-supervisor-project-items>
+        <app-director-project-item *ngIf="role === Role.DIRECTOR"
+                                   [projects]="directorProjects"></app-director-project-item>
       </div>
       <!-- /.card-body -->
     </div>

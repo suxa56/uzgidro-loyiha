@@ -60,7 +60,7 @@ export interface ProjectFilesResponse {
   created_add: string
   file_code: string
   updated_at: string
-  user: { id: number, username: string, section_name: string }
+  user: { id: number, username: string, section_name?: string }
   categories: { id: number, name: string }
 }
 
@@ -167,4 +167,36 @@ export interface ConclusionDto {
   fileCode: string
   comment: string
   createdAt: Date
+}
+
+
+export interface DirectorProjectsResponse {
+  id: number
+  arxiv_number: string
+  graphic_number: string
+  working_project_name: string
+  file_autocad: string
+  file_pdf: string
+  simeta_pdf: string
+  simeta_autocad: string
+  created_add: string
+  updated_at?: string
+  is_active_designer: boolean
+  subject: string
+  project_files: ProjectFilesResponse
+  is_director_accept: boolean
+  is_director_reject: boolean
+}
+
+export interface DirectorProjectsDto {
+  id: number
+  username: string
+  fileCode: string
+  archiveNumber: string
+  graphicNumber: string
+  workingProjectName: string
+  createdAt: Date
+  updatedAt?: Date
+  subject: string
+  isAccepted?: boolean
 }

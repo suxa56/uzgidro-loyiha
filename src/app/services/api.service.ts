@@ -23,6 +23,10 @@ const GET_SECTION = 'section_name/'
 const GET_REJECT_COMMENT = 'designer/reject-file/'
 const PATCH_ACCEPT_REJECT_PROJECT = 'designer/control-accept-reject/'
 
+const GET_DIRECTOR_PROJECTS = 'main/director-allfile/'
+const GET_DIRECTOR_APPROVED_PROJECTS = 'main/director-accept_file/'
+const GET_DIRECTOR_REJECTED_PROJECTS = 'main/director-reject-file/'
+
 const GET_CONCLUSION = 'designer/summary-file/'
 
 const DOWNLOAD_FILES = 'designer/control-download/'
@@ -134,6 +138,22 @@ export class ApiService {
   getRejectedProjects(token: string) {
     const options = this.setHeader(token)
     return this.http.get(SITE + GET_REJECTED_PROJECTS, {headers: options})
+  }
+
+
+  getDirectorProjects(token: string) {
+    const options = this.setHeader(token)
+    return this.http.get(SITE + GET_DIRECTOR_PROJECTS, {headers: options})
+  }
+
+  getDirectorApprovedProjects(token: string) {
+    const options = this.setHeader(token)
+    return this.http.get(SITE + GET_DIRECTOR_APPROVED_PROJECTS, {headers: options})
+  }
+
+  getDirectorRejectedProjects(token: string) {
+    const options = this.setHeader(token)
+    return this.http.get(SITE + GET_DIRECTOR_REJECTED_PROJECTS, {headers: options})
   }
 
   downloadFiles(type: string, projectId: number, token: string) {

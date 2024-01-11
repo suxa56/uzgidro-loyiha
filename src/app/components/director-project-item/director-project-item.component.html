@@ -1,0 +1,40 @@
+<table class="table table-auto">
+  <thead>
+  <tr>
+    <th>№</th>
+    <th>Ism</th>
+    <th>Bo'lim nomi</th>
+    <th>Hujjat kodi</th>
+    <th>Grafik raqami</th>
+    <th>Arxiv raqami</th>
+    <th>Ishchi loyiha nomi</th>
+    <th>Kiritilgan vaqti</th>
+    <th>Ozgartirilgan vaqti</th>
+    <th>Status</th>
+    <th>Batafsil</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let project of projects; index as i">
+  <tr>
+    <td>{{i+1}}</td>
+    <td>{{project.username}}</td>
+    <td>{{project.fileCode}}</td>
+    <td>{{project.graphicNumber}}</td>
+    <td>{{project.archiveNumber}}</td>
+    <td>{{project.workingProjectName}}</td>
+    <td>{{project.createdAt | date:'HH:mm, dd-MM-yyyy'}}</td>
+    <td>{{project.updatedAt | date:'HH:mm, dd-MM-yyyy'}}</td>
+    <td class="break-words max-w-lg">{{project.subject}}</td>
+    <td [ngClass]="{
+      'text-slate-600': project.isAccepted === null,
+      'text-red-600': !project.isAccepted ,
+      'text-green-600': project.isAccepted
+    }" [ngSwitch]="project.isAccepted">
+      <p *ngSwitchCase="null">Tekshirishda</p>
+      <p *ngSwitchCase="true">Qabul qilingan</p>
+      <p *ngSwitchCase="false">Rad etilgan</p>
+    </td>
+    <td><a *ngIf="project.isAccepted === null" [routerLink]="['/projects', project.id]"><i class="fa-solid fa-right-to-bracket"></i></a></td>
+  </tr>
+  </tbody>
+</table>

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService} from "@services/app.service";
-import {ProjectsResponse, Role} from "@/store/state";
+import {DirectorProjectsResponse, ProjectsResponse, Role} from "@/store/state";
 
 @Component({
   selector: 'app-dashboard',
@@ -54,6 +54,23 @@ export class DashboardComponent implements OnInit {
       })
       this.appService.getSupervisorRejectedProjects().subscribe({
         next: (response: ProjectsResponse[]) => {
+          this.rejectedProjects = response.length
+        }
+      })
+    } else if (this.appService.role == Role.DIRECTOR) {
+      this.appService.getDirectorProjects().subscribe({
+        next: (response: DirectorProjectsResponse[]) => {
+          this.allProjects = response.length
+          this.uncheckedProjects = response.filter(item => !item.is_director_accept && !item.is_director_reject).length
+        }
+      })
+      this.appService.getDirectorAcceptedProjects().subscribe({
+        next: (response: DirectorProjectsResponse[]) => {
+          this.approvedProjects = response.length
+        }
+      })
+      this.appService.getDirectorRejectedProjects().subscribe({
+        next: (response: DirectorProjectsResponse[]) => {
           this.rejectedProjects = response.length
         }
       })

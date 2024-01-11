@@ -221,6 +221,33 @@ export class AppService {
     )
   }
 
+  getDirectorProjects() {
+    return this.apiService.getDirectorProjects(this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
+  getDirectorAcceptedProjects() {
+    return this.apiService.getDirectorApprovedProjects(this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
+  getDirectorRejectedProjects() {
+    return this.apiService.getDirectorRejectedProjects(this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
   downloadFiles(type: string, projectId: number) {
     return this.apiService.downloadFiles(type, projectId, this.token).pipe(
       catchError((error) => {

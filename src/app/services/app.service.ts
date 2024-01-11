@@ -221,8 +221,8 @@ export class AppService {
     )
   }
 
-  downloadDocs(projectId: number) {
-    return this.apiService.downloadDocs(projectId, this.token).pipe(
+  downloadDocs(type: string, projectId: number) {
+    return this.apiService.downloadDocs(type, projectId, this.token).pipe(
       catchError((error) => {
         this.toastr.error(error.message, 'Ошибка при отправке данных')
         return [];

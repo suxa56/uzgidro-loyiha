@@ -21,20 +21,20 @@
     <td>{{doc.categories.name}}</td>
     <td>{{doc.file_code}}</td>
     <td>
-      <button (click)="download()" *ngIf="doc.decision_files"
+      <button (click)="download(doc, 'decision_files')" *ngIf="doc.decision_files"
               class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded disabled:bg-blue-300"><i
         class="fa-light fa-down-to-bracket w-5"></i></button>
     </td>
     <td>
-      <button (click)="download()" *ngIf="doc.calendar_files"
+      <button (click)="download(doc, 'calendar_files')" *ngIf="doc.calendar_files"
               class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded disabled:bg-blue-300"><i
         class="fa-light fa-down-to-bracket w-5"></i></button></td>
     <td>
-      <button (click)="download()" *ngIf="doc.contract_files"
+      <button (click)="download(doc, 'contract_files')" *ngIf="doc.contract_files"
               class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded disabled:bg-blue-300"><i
         class="fa-light fa-down-to-bracket w-5"></i></button></td>
     <td>
-      <button (click)="download()" *ngIf="doc.additional_files"
+      <button (click)="download(doc, 'additional_files')" *ngIf="doc.additional_files"
               class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded disabled:bg-blue-300"><i
         class="fa-light fa-down-to-bracket w-5"></i></button></td>
     <td>{{doc.created_add | date:'dd-MM-yyyy'}}</td>

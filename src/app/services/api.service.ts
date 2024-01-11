@@ -24,6 +24,8 @@ const GET_REJECT_COMMENT = 'designer/reject-file/'
 const PATCH_ACCEPT_REJECT_PROJECT = 'designer/control-accept-reject/'
 
 const DOWNLOAD_FILES = 'designer/control-download/'
+const DOWNLOAD_DOCS = 'designer/project-download/'
+
 
 @Injectable({
   providedIn: 'root'
@@ -136,9 +138,11 @@ export class ApiService {
     })
   }
 
-  downloadDocs(projectId: number, token: string){
-    return this.http.get(SITE + DOWNLOAD_FILES + projectId + '/', {
+  downloadDocs(type: string, projectId: number, token: string){
+    const params = new HttpParams().append('file-type', type)
+    return this.http.get(SITE + DOWNLOAD_DOCS + projectId + '/', {
       responseType: 'blob',
+      params: params,
       headers: {'Authorization': `Bearer ${token}`}
     })
   }

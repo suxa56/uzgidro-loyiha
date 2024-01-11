@@ -48,7 +48,7 @@ export const MENU = [
   {
     name: 'Birlamchi hujjatlar',
     iconClasses: 'fa-solid fa-files',
-    role: 'supervisor',
+    role: 'supervisor,director',
     path: ['/docs']
   },
   {
@@ -60,19 +60,19 @@ export const MENU = [
   {
     name: 'Barcha loyihalar',
     iconClasses: 'fa-solid fa-files',
-    role: 'designer,supervisor',
+    role: 'designer,supervisor,director',
     path: ['/projects']
   },
   {
     name: 'Qabul qilingan loyihalar',
     iconClasses: 'fa-solid fa-file-check',
-    role: 'designer,supervisor',
+    role: 'designer,supervisor,director',
     path: ['/approved']
   },
   {
     name: 'Rad etilgan loyihalar',
     iconClasses: 'fa-solid fa-file-xmark',
-    role: 'designer,supervisor',
+    role: 'designer,supervisor,director',
     path: ['/rejected']
   },
   {

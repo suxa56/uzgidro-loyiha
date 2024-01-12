@@ -3,7 +3,6 @@
   <tr>
     <th>№</th>
     <th>Ism</th>
-    <th>Bo'lim nomi</th>
     <th>Hujjat kodi</th>
     <th>Grafik raqami</th>
     <th>Arxiv raqami</th>
@@ -24,7 +23,6 @@
     <td>{{project.workingProjectName}}</td>
     <td>{{project.createdAt | date:'HH:mm, dd-MM-yyyy'}}</td>
     <td>{{project.updatedAt | date:'HH:mm, dd-MM-yyyy'}}</td>
-    <td class="break-words max-w-lg">{{project.subject}}</td>
     <td [ngClass]="{
       'text-slate-600': project.isAccepted === null,
       'text-red-600': !project.isAccepted ,

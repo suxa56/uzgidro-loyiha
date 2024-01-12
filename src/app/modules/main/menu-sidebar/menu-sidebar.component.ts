@@ -64,6 +64,12 @@ export const MENU = [
     path: ['/projects']
   },
   {
+    name: 'Tekshirishda loyihalar',
+    iconClasses: 'fa-solid fa-file-circle-info',
+    role: 'designer,supervisor,director',
+    path: ['/unchecked']
+  },
+  {
     name: 'Qabul qilingan loyihalar',
     iconClasses: 'fa-solid fa-file-check',
     role: 'designer,supervisor,director',

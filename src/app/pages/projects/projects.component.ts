@@ -52,6 +52,14 @@ export class ProjectsComponent implements OnInit {
             this.setSupervisorProjects(response, true)
           }
         })
+      } else if (this.router.url === '/unchecked') {
+        this.appService.getSupervisorProjects().subscribe({
+          next: (response: SupervisorProjectsResponse[]) => {
+            this.supervisorProjects = response.filter(item => !item.is_redirect_designer && !item.is_active_designer).map(project => {
+              return this.mapSupervisorResponseToDto(project)
+            })
+          }
+        })
       } else {
         this.appService.getSupervisorProjects().subscribe({
           next: (response: SupervisorProjectsResponse[]) => {
@@ -72,6 +80,14 @@ export class ProjectsComponent implements OnInit {
             this.setProjects(response)
           }
         })
+      } else if (this.router.url === '/unchecked') {
+        this.appService.getProjects().subscribe({
+          next: (response: ProjectsResponse[]) => {
+            this.projects = response.filter(item => !item.is_redirect_designer && !item.is_active_designer).map(project => {
+              return this.mapResponseToDto(project)
+            });
+          }
+        })
       } else {
         this.appService.getProjects().subscribe({
           next: (response: ProjectsResponse[]) => {
@@ -88,6 +104,12 @@ export class ProjectsComponent implements OnInit {
         })
       } else if (this.router.url === '/approved') {
         this.appService.getDirectorAcceptedProjects().subscribe({
+          next: (response: DirectorProjectsResponse[]) => {
+            this.setDirectorProjects(response)
+          }
+        })
+      } else if (this.router.url === '/unchecked') {
+        this.appService.getDirectorUncheckedProjects().subscribe({
           next: (response: DirectorProjectsResponse[]) => {
             this.setDirectorProjects(response)
           }

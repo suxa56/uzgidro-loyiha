@@ -230,6 +230,15 @@ export class AppService {
     )
   }
 
+  getDirectorUncheckedProjects() {
+    return this.apiService.getDirectorUncheckedProjects(this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
   getDirectorAcceptedProjects() {
     return this.apiService.getDirectorApprovedProjects(this.token).pipe(
       catchError((error) => {

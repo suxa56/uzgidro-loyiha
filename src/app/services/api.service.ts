@@ -26,6 +26,7 @@ const PATCH_ACCEPT_REJECT_PROJECT = 'designer/control-accept-reject/'
 const GET_DIRECTOR_PROJECTS = 'main/director-allfile/'
 const GET_DIRECTOR_APPROVED_PROJECTS = 'main/director-accept_file/'
 const GET_DIRECTOR_REJECTED_PROJECTS = 'main/director-reject-file/'
+const GET_DIRECTOR_UNCHECKED_PROJECTS = 'main/director-confirm-file/'
 
 const GET_CONCLUSION = 'designer/summary-file/'
 
@@ -144,6 +145,11 @@ export class ApiService {
   getDirectorProjects(token: string) {
     const options = this.setHeader(token)
     return this.http.get(SITE + GET_DIRECTOR_PROJECTS, {headers: options})
+  }
+
+  getDirectorUncheckedProjects(token: string) {
+    const options = this.setHeader(token)
+    return this.http.get(SITE + GET_DIRECTOR_UNCHECKED_PROJECTS, {headers: options})
   }
 
   getDirectorApprovedProjects(token: string) {

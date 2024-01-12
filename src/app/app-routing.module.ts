@@ -59,6 +59,10 @@ const routes: Routes = [
         component: ProjectsComponent
       },
       {
+        path: 'unchecked',
+        component: ProjectsComponent
+      },
+      {
         path: '',
         component: DashboardComponent
       }

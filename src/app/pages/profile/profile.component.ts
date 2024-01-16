@@ -23,24 +23,6 @@ export class ProfileComponent implements OnInit {
     this.setupForm()
   }
 
-  formatPhoneNumber(event: any) {
-    let value = this.profileForm.get('phone').value
-    let formatted: string
-    // Удаляем все нецифровые символы из введенного значения
-    const cleanedValue = value.replace(/\D/g, '');
-
-    // Форматируем номер телефона (пример: +998 (код оператора) номер-телефона)
-    if (cleanedValue.length > 4) {
-      formatted = `+998 (${cleanedValue.substring(3, 5)}) ${cleanedValue.substring(5, 8)}-${cleanedValue.substring(8, 10)}-${cleanedValue.substring(10, 12)}`;
-    } else if (cleanedValue.length > 0) {
-      formatted = `+998 (${cleanedValue}`;
-    } else {
-      formatted = '+998';
-    }
-
-    this.profileForm.get('phone').setValue(formatted)
-  }
-
   updateProfile() {
     if (this.profileForm.valid) {
       this.loading = true

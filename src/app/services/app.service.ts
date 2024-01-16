@@ -66,7 +66,7 @@ export class AppService {
           }
         },
         error: error => {
-          this.toastr.error(error, 'Ошибка при запросе данных')
+          this.toastr.error(error.message, 'Ошибка при запросе данных')
         },
         complete: () => {
         }

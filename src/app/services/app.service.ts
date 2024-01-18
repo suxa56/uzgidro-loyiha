@@ -124,14 +124,13 @@ export class AppService {
     )
   }
 
-  submitProjectFiles(code: string, categoryId: number, files: Record<string, File>) {
+  submitProjectFiles(code: string, categoryId: number, files: {category: string, file: File}[]) {
     const formData = new FormData()
     formData.append('categories', categoryId)
     formData.append('file_code', code)
-    formData.append('decision_files', files['decision'], files['decision'].name)
-    formData.append('calendar_files', files['calendar'], files['calendar'].name)
-    formData.append('contract_files', files['contract'], files['contract'].name)
-    formData.append('additional_files', files['addition'], files['addition'].name)
+    for (const file of files) {
+      formData.append(file.category, file.file, file.file.name)
+    }
     return this.apiService.createProjectFiles(formData, this.token).pipe(
       catchError((error) => {
         this.toastr.error(error.message, 'Ошибка при отправке данных')

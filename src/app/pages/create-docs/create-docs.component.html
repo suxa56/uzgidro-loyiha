@@ -58,22 +58,45 @@
         </div>
         <div class="card-footer space-y-4">
           <div>
-            <div class="flex xl:flex-row max-xl:flex-col max-xl:space-y-2">
-              <div>
-                Qaror:
-                <input formControlName="decision" (change)="documentOnChange($event, 'decision')" class="file" type="file" accept=".pdf, .doc, .docx, .xls, .xlsx">
-              </div>
+            <div class="flex flex-col space-y-2">
               <div>
                 Kalendar:
-                <input formControlName="calendar" (change)="documentOnChange($event, 'calendar')" class="file" type="file" accept=".pdf, .doc, .docx, .xls, .xlsx">
-              </div>
-              <div>
-                Shartnoma:
-                <input formControlName="contract" (change)="documentOnChange($event, 'contract')" class="file" type="file" accept=".pdf, .doc, .docx, .xls, .xlsx">
+                <input formControlName="calendar" (change)="documentOnChange($event, 'calendar_files')" class="file"
+                       type="file" accept=".pdf, .doc, .docx, .xls, .xlsx">
               </div>
               <div>
                 Qoshimcha fayl:
-                <input formControlName="addition" (change)="documentOnChange($event, 'addition')" class="file" type="file" accept=".pdf, .doc, .docx, .xls, .xlsx">
+                <input formControlName="addition" (change)="documentOnChange($event, 'additional_files')" class="file"
+                       type="file" accept=".pdf, .doc, .docx, .xls, .xlsx">
+              </div>
+              <div>
+                Qaror:
+                <div class="grid xl:grid-cols-6 lg:grid-cols-3 sm:grid-cols-2 gap-4">
+                  <input formControlName="decision" (change)="documentOnChange($event, 'decision_files')" class="file"
+                         type="file" accept=".pdf, .doc, .docx, .xls, .xlsx">
+                  <input formControlName="decision1" (change)="documentOnChange($event, 'decision_files1')" class="file"
+                         type="file" accept=".pdf, .doc, .docx, .xls, .xlsx">
+                  <input formControlName="decision2" (change)="documentOnChange($event, 'decision_files2')" class="file"
+                         type="file" accept=".pdf, .doc, .docx, .xls, .xlsx">
+                  <input formControlName="decision3" (change)="documentOnChange($event, 'decision_files3')" class="file"
+                         type="file" accept=".pdf, .doc, .docx, .xls, .xlsx">
+                </div>
+              </div>
+              <div>
+                Shartnoma:
+                <div class="grid xl:grid-cols-6 lg:grid-cols-3 sm:grid-cols-2 gap-4">
+                  <input formControlName="contract" (change)="documentOnChange($event, 'contract_files')" class="file"
+                         type="file" accept=".pdf, .doc, .docx, .xls, .xlsx">
+                  <input formControlName="contract1" (change)="documentOnChange($event, 'contract_files1')" class="file"
+                         type="file" accept=".pdf, .doc, .docx, .xls, .xlsx">
+                  <input formControlName="contract2" (change)="documentOnChange($event, 'contract_files2')" class="file"
+                         type="file" accept=".pdf, .doc, .docx, .xls, .xlsx">
+                  <input formControlName="contract3" (change)="documentOnChange($event, 'contract_files3')" class="file"
+                         type="file" accept=".pdf, .doc, .docx, .xls, .xlsx">
+                  <input formControlName="contract4" (change)="documentOnChange($event, 'contract_files4')" class="file"
+                         type="file" accept=".pdf, .doc, .docx, .xls, .xlsx">
+                  <input formControlName="contract5" (change)="documentOnChange($event, 'contract_files5')" class="file"
+                         type="file" accept=".pdf, .doc, .docx, .xls, .xlsx"></div>
               </div>
             </div>
           </div>

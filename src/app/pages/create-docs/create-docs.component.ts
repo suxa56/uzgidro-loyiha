@@ -14,7 +14,7 @@ export class CreateDocsComponent implements OnInit {
   categories: Categories[]
   docsForm: FormGroup
   loading = false
-  files: Record<string, File> = {}
+  files: { category: string, file: File }[] = []
   selectedCategoryId: number
 
   constructor(private appService: AppService,
@@ -45,18 +45,31 @@ export class CreateDocsComponent implements OnInit {
     this.docsForm = new FormGroup({
       category: new FormControl(null, Validators.required),
       code: new FormControl(null, Validators.required),
-      decision: new FormControl(null, Validators.required),
       calendar: new FormControl(null, Validators.required),
-      contract: new FormControl(null, Validators.required),
-      addition: new FormControl(null, Validators.required)
+      decision: new FormControl(null),
+      decision1: new FormControl(null),
+      decision2: new FormControl(null),
+      decision3: new FormControl(null),
+      contract: new FormControl(null),
+      contract1: new FormControl(null),
+      contract2: new FormControl(null),
+      contract3: new FormControl(null),
+      contract4: new FormControl(null),
+      contract5: new FormControl(null),
+      addition: new FormControl(null)
     })
   }
 
   documentOnChange(event: any, category: string) {
-    const file:File = event.target.files[0];
+    const file: File = event.target.files[0];
 
     if (file) {
-      this.files[category] = file
+      let item = this.files.find(value => value.category === category)
+      if (item) {
+        item.file = file
+      } else {
+        this.files.push({category: category, file: file})
+      }
     }
   }
 

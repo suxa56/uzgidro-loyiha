@@ -13,6 +13,7 @@ const PATCH_PROJECT = 'designer/patch-file/'
 const GET_ALL_PROJECTS = 'designer/all-files/'
 const GET_APPROVED_PROJECTS = 'designer/allowed-file/'
 const GET_REJECTED_PROJECTS = 'designer/reject-file/'
+const GET_SUPERVISOR_PROJECT_DETAILS = 'designer/project-detail/'
 const GET_SUPERVISOR_PROJECT_FILES = 'designer/control-project-file-all/'
 const GET_SUPERVISOR_PROJECTS = 'designer/control-allfiles/'
 const GET_SUPERVISOR_PROJECT = 'designer/control-file-detail/'
@@ -94,6 +95,11 @@ export class ApiService {
   getProjects(token: string) {
     const options = this.setHeader(token)
     return this.http.get(SITE + GET_ALL_PROJECTS, {headers: options})
+  }
+
+  getProjectDetails(projectId: number, token: string) {
+    const options = this.setHeader(token)
+    return this.http.get(SITE + GET_SUPERVISOR_PROJECT_DETAILS + projectId + '/', {headers: options})
   }
 
   getConclusions(token: string) {

@@ -148,6 +148,15 @@ export class AppService {
     )
   }
 
+  getProjectDetails(projectId: number) {
+    return this.apiService.getProjectDetails(projectId,this.token).pipe(
+      catchError((error) => {
+        this.toastr.error(error.message, 'Ошибка при отправке данных')
+        return [];
+      })
+    )
+  }
+
   getConclusions() {
     return this.apiService.getConclusions(this.token).pipe(
       catchError((error) => {

@@ -16,7 +16,7 @@ export class CreateProjectComponent implements OnInit{
   projectFileId: number
   fileForm: FormGroup
   loading = false
-  files: Record<string, File> = {}
+  files: { category: string, file: File }[] = []
 
   constructor(private appService: AppService, private toastr: ToastrService, private router: Router) {
   }
@@ -49,7 +49,12 @@ export class CreateProjectComponent implements OnInit{
     const file:File = event.target.files[0];
 
     if (file) {
-      this.files[category] = file
+      let item = this.files.find(value => value.category === category)
+      if (item) {
+        item.file = file
+      } else {
+        this.files.push({category: category, file: file})
+      }
     }
   }
 
@@ -60,7 +65,7 @@ export class CreateProjectComponent implements OnInit{
   selectCategory(id: number) {
     let cat = this.projectFiles.find(item => item.id === id)
     this.projectFileId = cat.id
-    this.fileForm.get('file').setValue(cat.fileCode)
+    this.fileForm.get('file').setValue(cat.name)
   }
 
 

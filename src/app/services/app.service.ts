@@ -274,17 +274,16 @@ export class AppService {
     )
   }
 
-  submitProject(projectFileId: number, {graphic, archive, worker, subject}, files: Record<string, File>) {
+  submitProject(projectFileId: number, {graphic, archive, worker, subject}, files: {category: string, file: File}[]) {
     const formData = new FormData()
     formData.append('project_files', projectFileId)
     formData.append('graphic_number', graphic)
     formData.append('working_project_name', worker)
     formData.append('arxiv_number', archive)
     formData.append('subject', subject)
-    formData.append('file_pdf', files['projectPdf'])
-    formData.append('file_autocad', files['projectAutocad'])
-    formData.append('simeta_pdf', files['estimatePdf'])
-    formData.append('simeta_autocad', files['estimateExcel'])
+    for (const file of files) {
+      formData.append(file.category, file.file, file.file.name)
+    }
     return this.apiService.createProject(formData, this.token).pipe(
       catchError((error) => {
         this.toastr.error(error.message, 'Ошибка при отправке данных')

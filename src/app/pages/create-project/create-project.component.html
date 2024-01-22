@@ -23,12 +23,11 @@
   <div class="container-fluid">
     <div class="card">
       <form [formGroup]="fileForm" (ngSubmit)="sendProject()">
-        <div class="flex flex-row border-b border-slate-300 py-3 px-4 justify-between items-center">
-          <div class="card-title outline-0" (click)="toggleMenu()">
-            <input formControlName="file" class="card-title outline-0" placeholder="Birlanish hujjatlar kodi tanlang"/>
+        <div class="flex flex-row w-full border-b border-slate-300 py-3 px-4 justify-between items-center">
+          <div class="card-title outline-0 w-full" (click)="toggleMenu()">
+            <input formControlName="file" class="card-title outline-0 w-full" placeholder="Birlanish hujjatlar kodi tanlang"/>
 
-            <div *ngIf="isMenuOpen" class="absolute w-64 bg-white mt-2 shadow-lg">
-              <!-- Список пунктов меню -->
+            <div *ngIf="isMenuOpen" class="absolute w-1/2 bg-white max-h-96 mt-2 shadow-lg overflow-y-auto">
               <ul class="list-none p-2" *ngFor="let file of projectFiles">
                 <li><p class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                        (click)="selectCategory(file.id)">{{ file.name }} : {{ file.fileCode }}</p></li>

@@ -11,7 +11,7 @@ import {AppService} from "@services/app.service";
   styleUrls: ['./files-modal.component.scss']
 })
 export class FilesModalComponent implements OnInit {
-  files: Record<string, File> = {}
+  files: { category: string, file: File }[] = []
   fileForm: FormGroup
   comment: string
   rejectedBy: string
@@ -43,7 +43,12 @@ export class FilesModalComponent implements OnInit {
     const file: File = event.target.files[0];
 
     if (file) {
-      this.files[category] = file
+      let item = this.files.find(value => value.category === category)
+      if (item) {
+        item.file = file
+      } else {
+        this.files.push({category: category, file: file})
+      }
     }
   }
 

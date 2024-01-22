@@ -19,12 +19,12 @@
       <div class="flex xl:flex-row max-xl:flex-col max-xl:space-y-2">
         <div>
           PDF:
-          <input formControlName="projectPdf" (change)="documentOnChange($event, 'projectPdf')" class="file" type="file"
+          <input formControlName="projectPdf" (change)="documentOnChange($event, 'file_pdf')" class="file" type="file"
                  accept="application/pdf">
         </div>
         <div>
           Autocad:
-          <input formControlName="projectAutocad" (change)="documentOnChange($event, 'projectAutocad')" class="file"
+          <input formControlName="projectAutocad" (change)="documentOnChange($event, 'file_autocad')" class="file"
                  type="file" accept=".dwg">
         </div>
       </div>
@@ -34,15 +34,21 @@
       <div class="flex xl:flex-row max-xl:flex-col max-xl:space-y-2">
         <div>
           PDF:
-          <input formControlName="estimatePdf" (change)="documentOnChange($event, 'estimatePdf')" class="file"
+          <input formControlName="estimatePdf" (change)="documentOnChange($event, 'simeta_pdf')" class="file"
                  type="file"
                  accept="application/pdf">
         </div>
         <div>
           Excel:
-          <input formControlName="estimateExcel" (change)="documentOnChange($event, 'estimateExcel')" class="file"
+          <input formControlName="estimateExcel" (change)="documentOnChange($event, 'simeta_autocad')" class="file"
                  type="file"
                  accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        </div>
+        <div>
+          Excel:
+          <input formControlName="estimateExcel" (change)="documentOnChange($event, 'smeta_titul')" class="file"
+                 type="file"
+                 accept=".doc, .docx, .xls, .xlsx">
         </div>
       </div>
     </div>

@@ -1,26 +1,26 @@
 <h2 mat-dialog-title>{{ data.categories.name }}</h2>
   <mat-dialog-content>
     <div class="flex flex-col">
-      <h3 *ngIf="additional">Qoshimcha</h3>
-      <div class="flex flex-row space-x-8 mb-4" *ngIf="additional">
+      <h3 *ngIf="additional.length !== 0">Qoshimcha</h3>
+      <div class="flex flex-row space-x-8 mb-4" *ngIf="additional.length !== 0">
         <button *ngFor="let item of additional" (click)="download(item)"
           class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded disabled:bg-blue-300"><i
           class="fa-light fa-down-to-bracket w-5"></i></button>
       </div>
-      <h3 *ngIf="calendar">Kalendar</h3>
-      <div class="flex flex-row space-x-8 mb-4" *ngIf="calendar">
+      <h3 *ngIf="calendar.length !== 0">Kalendar</h3>
+      <div class="flex flex-row space-x-8 mb-4" *ngIf="calendar.length !== 0">
         <button *ngFor="let item of calendar" (click)="download(item)"
                 class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded disabled:bg-blue-300"><i
           class="fa-light fa-down-to-bracket w-5"></i></button>
       </div>
-      <h3 *ngIf="decision">Qaror</h3>
-      <div class="flex flex-row space-x-8 mb-4" *ngIf="decision">
+      <h3 *ngIf="decision.length !== 0">Qaror</h3>
+      <div class="flex flex-row space-x-8 mb-4" *ngIf="decision.length !== 0">
         <button *ngFor="let item of decision" (click)="download(item)"
                 class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded disabled:bg-blue-300"><i
           class="fa-light fa-down-to-bracket w-5"></i></button>
       </div>
-      <h3 *ngIf="contract">Shartnoma</h3>
-      <div class="flex flex-row space-x-8 mb-4" *ngIf="contract">
+      <h3 *ngIf="contract.length !== 0">Shartnoma</h3>
+      <div class="flex flex-row space-x-8 mb-4" *ngIf="contract.length !== 0">
         <button *ngFor="let item of contract" (click)="download(item)"
                 class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded disabled:bg-blue-300"><i
           class="fa-light fa-down-to-bracket w-5"></i></button>

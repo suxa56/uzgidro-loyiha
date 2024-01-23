@@ -125,6 +125,7 @@ export interface ProjectDetailResponse {
     file_pdf: string
     simeta_pdf: string
     simeta_autocad: string
+    smeta_titul: string
     project_files: { id: number, file_code: string }
     arxiv_number: string
     graphic_number: string
@@ -147,6 +148,7 @@ export interface ProjectDetailDto {
   projectAutocad: string
   estimatePdf: string
   estimateExcel: string
+  estimateTitle: string
   createdAt: string
 }
 

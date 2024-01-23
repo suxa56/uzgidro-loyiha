@@ -35,6 +35,7 @@
             <th>Loyiha Autocad</th>
             <th>Smeta PDF</th>
             <th>Smeta Excel</th>
+            <th>Smeta Titul</th>
             <th>Sana</th>
           </tr>
           </thead>
@@ -63,6 +64,11 @@
             </td>
             <td>
               <button (click)="download('simeta_autocad')" *ngIf="project.estimateExcel"
+                      class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded disabled:bg-blue-300"><i
+                class="fa-light fa-down-to-bracket w-5"></i></button>
+            </td>
+            <td>
+              <button (click)="download('smeta_titul')" *ngIf="project.estimateTitle"
                       class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded disabled:bg-blue-300"><i
                 class="fa-light fa-down-to-bracket w-5"></i></button>
             </td>

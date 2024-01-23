@@ -26,6 +26,7 @@ export class ProjectDetailsComponent implements OnInit {
     })
     this.appService.getSupervisorProjectById(this.projectId).subscribe({
       next: (response: ProjectDetailResponse) => {
+        console.log(response)
         const project = response.data
         this.project = {
           id: project.id,
@@ -40,6 +41,7 @@ export class ProjectDetailsComponent implements OnInit {
           projectAutocad: project.file_autocad,
           estimateExcel: project.simeta_autocad,
           estimatePdf: project.simeta_pdf,
+          estimateTitle: project.smeta_titul,
           createdAt: project.created_add ? project.created_add : ''
         }
       }
